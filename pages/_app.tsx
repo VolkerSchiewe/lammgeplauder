@@ -1,4 +1,6 @@
+import React from "react";
 import '../styles/tailwind.css';
+import { AppProps } from "next/app";
 
-// @ts-ignore
-export default ({ Component, pageProps }) => <Component { ...pageProps } />
+const App = ({ Component, pageProps }: AppProps) => <Component { ...pageProps } />
+export default App
