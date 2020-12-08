@@ -7,6 +7,7 @@ declare module "podcast" {
     language: string
     description: string
     imageUrl: string
+    itunesCategory: Array<{ text: string }>
     itunesOwner: {
       name: string,
       email: string
@@ -16,9 +17,9 @@ declare module "podcast" {
   interface FeedItem {
     title: string
     enclosure: {
-      url:string,
+      url: string,
       size: string,
-      type:string
+      type: string
     }
     date: string
   }

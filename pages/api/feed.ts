@@ -7,8 +7,9 @@ interface DatoCmsResponse {
   podcast: {
     title: string
     description: string
+    categories: string[]
     logo: {
-      url:string
+      url: string
     }
   }
   allEpisodes:
@@ -31,6 +32,7 @@ const feedApi = async (_req: NextApiRequest, res: NextApiResponse) => {
       podcast{
         title
         description
+        categories
         logo {
           url
         }
@@ -56,6 +58,7 @@ const feedApi = async (_req: NextApiRequest, res: NextApiResponse) => {
     author: "EBU-Jugend",
     language: "de-DE",
     imageUrl: podcast.logo.url,
+    itunesCategory: podcast.categories.map(cat => ({ text: cat })),
     itunesOwner: {
       name: "EBU-Jugend",
       email: "info@lammgeplauder.de"
