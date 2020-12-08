@@ -4,11 +4,18 @@ declare module "podcast" {
     feedUrl: string
     siteUrl: string
     author: string
+    language: string
+    description: string
   }
 
   interface FeedItem {
     title: string
-    url: string
+    enclosure: {
+      url:string,
+      size: string,
+      type:string
+    }
+    date: string
   }
 
   class Podcast {

@@ -2,12 +2,20 @@ import { NextApiRequest, NextApiResponse } from "next";
 import Podcast from 'podcast';
 
 interface DatoCmsResponse {
-  data: Array<{ attributes: { name: string, audio: { path: string } } }>
+  data: Array<{
+    attributes: {
+      name: string, audio: {
+        format: string;
+        size: string;
+        path: string
+      }, updated_at: string
+    }
+  }>
 
 }
 
-const feedApi =async (_req: NextApiRequest, res: NextApiResponse) => {
-  if (!process.env.DATOCMS_API_TOKEN){
+const feedApi = async (_req: NextApiRequest, res: NextApiResponse) => {
+  if (!process.env.DATOCMS_API_TOKEN) {
     res.statusCode = 500
     res.end("Configuration Error")
     return
@@ -22,13 +30,20 @@ const feedApi =async (_req: NextApiRequest, res: NextApiResponse) => {
   const feed = new Podcast({
     title: "Lammgeplauder Podcast",
     feedUrl: "",
+    description: "Ein Podcast der EBU-Jugend",
     siteUrl: "https://lammgeplauder.de",
     author: "EBU-Jugend",
+    language: "de-DE",
   });
   data.forEach(record => {
     feed.addItem({
       title: record.attributes.name,
-      url: "https://www.datocms-assets.com" + record.attributes.audio.path,
+      enclosure: {
+        url: "https://www.datocms-assets.com" + record.attributes.audio.path,
+        size: record.attributes.audio.size,
+        type: `audio/${ record.attributes.audio.format }`
+      },
+      date: record.attributes.updated_at
     });
   })
 
