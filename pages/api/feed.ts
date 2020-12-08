@@ -56,6 +56,10 @@ const feedApi = async (_req: NextApiRequest, res: NextApiResponse) => {
     author: "EBU-Jugend",
     language: "de-DE",
     imageUrl: podcast.logo.url,
+    itunesOwner: {
+      name: "EBU-Jugend",
+      email: "info@lammgeplauder.de"
+    }
   });
 
   allEpisodes.forEach(episode => {

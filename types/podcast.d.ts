@@ -7,6 +7,10 @@ declare module "podcast" {
     language: string
     description: string
     imageUrl: string
+    itunesOwner: {
+      name: string,
+      email: string
+    }
   }
 
   interface FeedItem {
@@ -20,8 +24,7 @@ declare module "podcast" {
   }
 
   class Podcast {
-    constructor(feed: Feed) {
-    }
+    constructor(feed: Feed)
 
     addItem(item: FeedItem)
 
