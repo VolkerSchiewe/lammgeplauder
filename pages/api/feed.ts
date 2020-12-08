@@ -1,49 +1,72 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Podcast from 'podcast';
+import { getGraphqlClient } from "../../utils/graphql-client";
+import { gql } from "graphql-request";
 
 interface DatoCmsResponse {
-  data: Array<{
-    attributes: {
-      name: string, audio: {
-        format: string;
-        size: string;
-        path: string
-      }, updated_at: string
+  podcast: {
+    title: string
+    description: string
+    logo: {
+      url:string
     }
-  }>
+  }
+  allEpisodes:
+    Array<{
+      name: string,
+      audio: {
+        mimeType: string;
+        size: string;
+        url: string
+      },
+      updatedAt: string
+    }>
 
 }
 
 const feedApi = async (_req: NextApiRequest, res: NextApiResponse) => {
-  if (!process.env.DATOCMS_API_TOKEN) {
-    res.statusCode = 500
-    res.end("Configuration Error")
-    return
-  }
-  const { data }: DatoCmsResponse = await fetch("https://site-api.datocms.com/items", {
-    method: "GET",
-    headers: {
-      "Authorization": `Bearer ${ process.env.DATOCMS_API_TOKEN }`,
-      "Accept": "application/json",
+  const client = getGraphqlClient()
+  const query = gql`
+    {
+      podcast{
+        title
+        description
+        logo {
+          url
+        }
+      }
+      allEpisodes {
+        name
+        updatedAt
+        audio {
+          url
+          size
+          mimeType
+        }
+      }
     }
-  }).then(res => res.json())
+  `
+  const { podcast, allEpisodes } = await client.request<DatoCmsResponse>(query)
+
   const feed = new Podcast({
-    title: "Lammgeplauder Podcast",
+    title: podcast.title,
     feedUrl: "",
-    description: "Ein Podcast der EBU-Jugend",
+    description: podcast.description,
     siteUrl: "https://lammgeplauder.de",
     author: "EBU-Jugend",
     language: "de-DE",
+    imageUrl: podcast.logo.url,
   });
-  data.forEach(record => {
+
+  allEpisodes.forEach(episode => {
     feed.addItem({
-      title: record.attributes.name,
+      title: episode.name,
       enclosure: {
-        url: "https://www.datocms-assets.com" + record.attributes.audio.path,
-        size: record.attributes.audio.size,
-        type: `audio/${ record.attributes.audio.format }`
+        url: episode.audio.url,
+        size: episode.audio.size,
+        type: episode.audio.mimeType
       },
-      date: record.attributes.updated_at
+      date: episode.updatedAt
     });
   })
 

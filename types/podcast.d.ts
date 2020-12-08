@@ -6,6 +6,7 @@ declare module "podcast" {
     author: string
     language: string
     description: string
+    imageUrl: string
   }
 
   interface FeedItem {
