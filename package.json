@@ -1,5 +1,5 @@
 {
-  "name": "with-typescript",
+  "name": "lammgeplauder",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",
@@ -8,7 +8,8 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "next": "latest",
+    "next": "^10.0.3",
+    "postcss": "^8.1.14",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
@@ -16,6 +17,8 @@
     "@types/node": "^12.12.21",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
+    "autoprefixer": "^10.0.4",
+    "tailwindcss": "^2.0.1",
     "typescript": "4.0"
   },
   "license": "MIT"
