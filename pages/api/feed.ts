@@ -20,6 +20,7 @@ interface DatoCmsResponse {
         size: string;
         url: string
       },
+      description: string
       updatedAt: string
     }>
 
@@ -39,6 +40,7 @@ const feedApi = async (_req: NextApiRequest, res: NextApiResponse) => {
       }
       allEpisodes {
         name
+        description
         updatedAt
         audio {
           url
@@ -58,7 +60,7 @@ const feedApi = async (_req: NextApiRequest, res: NextApiResponse) => {
     author: "EBU-Jugend",
     language: "de-DE",
     imageUrl: podcast.logo.url,
-    itunesCategory: podcast.categories.map(cat => ({ text: cat })),
+    itunesCategory: [{ text: podcast.categories.join(" &amp; ") }],
     itunesOwner: {
       name: "EBU-Jugend",
       email: "info@lammgeplauder.de"
@@ -73,7 +75,8 @@ const feedApi = async (_req: NextApiRequest, res: NextApiResponse) => {
         size: episode.audio.size,
         type: episode.audio.mimeType
       },
-      date: episode.updatedAt
+      date: episode.updatedAt,
+      description: episode.description,
     });
   })
 

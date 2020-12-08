@@ -22,6 +22,7 @@ declare module "podcast" {
       type: string
     }
     date: string
+    description: string
   }
 
   class Podcast {
