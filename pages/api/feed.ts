@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import Podcast from 'podcast';
 import { getGraphqlClient } from "../../utils/graphql-client";
 import { gql } from "graphql-request";
+import absoluteUrl from "next-absolute-url/index";
 
 interface DatoCmsResponse {
   podcast: {
@@ -26,8 +27,9 @@ interface DatoCmsResponse {
 
 }
 
-const feedApi = async (_req: NextApiRequest, res: NextApiResponse) => {
+const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const client = getGraphqlClient()
+
   const query = gql`
     {
       podcast{
@@ -51,12 +53,12 @@ const feedApi = async (_req: NextApiRequest, res: NextApiResponse) => {
     }
   `
   const { podcast, allEpisodes } = await client.request<DatoCmsResponse>(query)
-
+  const { origin } = absoluteUrl(req)
   const feed = new Podcast({
     title: podcast.title,
     feedUrl: "",
     description: podcast.description,
-    siteUrl: "https://lammgeplauder.de",
+    siteUrl: origin,
     author: "EBU-Jugend",
     language: "de-DE",
     imageUrl: podcast.logo.url,
@@ -68,8 +70,10 @@ const feedApi = async (_req: NextApiRequest, res: NextApiResponse) => {
   });
 
   allEpisodes.forEach(episode => {
+    const guid = episode.name.toLowerCase().replace(" ", "-")
     feed.addItem({
       title: episode.name,
+      guid: guid,
       enclosure: {
         url: episode.audio.url,
         size: episode.audio.size,
@@ -77,6 +81,7 @@ const feedApi = async (_req: NextApiRequest, res: NextApiResponse) => {
       },
       date: episode.updatedAt,
       description: episode.description,
+      url: `${ origin }#${ guid }`
     });
   })
 

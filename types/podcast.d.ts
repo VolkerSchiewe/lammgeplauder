@@ -16,6 +16,7 @@ declare module "podcast" {
 
   interface FeedItem {
     title: string
+    guid: string
     enclosure: {
       url: string,
       size: string,
@@ -23,6 +24,7 @@ declare module "podcast" {
     }
     date: string
     description: string
+    url: string
   }
 
   class Podcast {
