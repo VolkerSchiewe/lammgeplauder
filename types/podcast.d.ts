@@ -25,6 +25,7 @@ declare module "podcast" {
     date: string
     description: string
     url: string
+    itunesDuration: number
   }
 
   class Podcast {

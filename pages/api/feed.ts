@@ -3,6 +3,7 @@ import Podcast from 'podcast';
 import { getGraphqlClient } from "../../utils/graphql-client";
 import { gql } from "graphql-request";
 import absoluteUrl from "next-absolute-url/index";
+import getAudioDurationInSeconds from "get-audio-duration";
 
 interface DatoCmsResponse {
   podcast: {
@@ -69,8 +70,9 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   });
 
-  allEpisodes.forEach(episode => {
+  for (const episode of allEpisodes) {
     const guid = episode.name.toLowerCase().replace(" ", "-")
+    const duration = await getAudioDurationInSeconds(episode.audio.url)
     feed.addItem({
       title: episode.name,
       guid: guid,
@@ -81,9 +83,10 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
       },
       date: episode.updatedAt,
       description: episode.description,
+      itunesDuration: duration,
       url: `${ origin }#${ guid }`
     });
-  })
+  }
 
   res.statusCode = 200
   res.setHeader('Content-Type', 'application/xml')
