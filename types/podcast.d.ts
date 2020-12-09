@@ -1,4 +1,9 @@
 declare module "podcast" {
+  interface ITunesCategory {
+    text: string,
+    subcats?: Array<ITunesCategory>
+  }
+
   interface Feed {
     title: string
     feedUrl: string
@@ -7,7 +12,7 @@ declare module "podcast" {
     language: string
     description: string
     imageUrl: string
-    itunesCategory: Array<{ text: string }>
+    itunesCategory: Array<ITunesCategory>
     itunesOwner: {
       name: string,
       email: string

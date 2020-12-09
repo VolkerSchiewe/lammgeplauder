@@ -9,7 +9,6 @@ interface DatoCmsResponse {
   podcast: {
     title: string
     description: string
-    categories: string[]
     logo: {
       url: string
     }
@@ -36,7 +35,6 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
       podcast{
         title
         description
-        categories
         logo {
           url
         }
@@ -63,7 +61,7 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
     author: "EBU-Jugend",
     language: "de-DE",
     imageUrl: podcast.logo.url,
-    itunesCategory: [{ text: podcast.categories.join(" &amp; ") }],
+    itunesCategory: [{ text: "Religion & Spirituality", subcats: [{text: "Christianity"}] }],
     itunesOwner: {
       name: "EBU-Jugend",
       email: "info@lammgeplauder.de"
