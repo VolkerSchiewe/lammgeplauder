@@ -17,9 +17,9 @@ const HomePage = () => {
       <h1 className={ "text-3xl sm:text-5xl text-center" }>Lammgeplauder Podcast</h1>
       <span>Ein Podcast der EBU-Jugend</span>
       <div className={ "grid gap-x-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" }>
-        <a href={ "" }>
-          <Image src={ "/google-podcast-badge.svg" } alt={ "Bei Google Podcast anhören" } width={ 200 }
-                 height={ 50 }/>
+        <a
+          href={ "https://podcasts.google.com/feed/aHR0cHM6Ly9sYW1tZ2VwbGF1ZGVyLmRlL2FwaS9mZWVk?sa=X&ved=0CAMQ4aUDahcKEwig-KGuncbtAhUAAAAAHQAAAAAQAQ&hl=de" }>
+          <Image src={ "/google-podcast-badge.svg" } alt={ "Bei Google Podcast anhören" } width={ 200 } height={ 50 }/>
         </a>
         <a href={ "https://podcasts.apple.com/de/podcast/lammgeplauder-podcast/id1544078980" }>
           <Image src={ "/apple-podcast-badge.svg" } alt={ "Anhören auf Apple Podcast" } width={ 200 } height={ 50 }/>
