@@ -4,27 +4,11 @@ import { getGraphqlClient } from "../../utils/graphql-client";
 import { gql } from "graphql-request";
 import absoluteUrl from "next-absolute-url/index";
 import getAudioDurationInSeconds from "get-audio-duration";
+import { Episode, Podcast as PodcastType } from "../../types/dato-cms";
 
 interface DatoCmsResponse {
-  podcast: {
-    title: string
-    description: string
-    logo: {
-      url: string
-    }
-  }
-  allEpisodes:
-    Array<{
-      name: string,
-      audio: {
-        mimeType: string;
-        size: string;
-        url: string
-      },
-      description: string
-      updatedAt: string
-    }>
-
+  podcast: PodcastType
+  allEpisodes: Array<Episode>
 }
 
 const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -61,7 +45,7 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
     author: "EBU-Jugend",
     language: "de-DE",
     imageUrl: podcast.logo.url,
-    itunesCategory: [{ text: "Religion & Spirituality", subcats: [{text: "Christianity"}] }],
+    itunesCategory: [{ text: "Religion & Spirituality", subcats: [{ text: "Christianity" }] }],
     itunesOwner: {
       name: "EBU-Jugend",
       email: "info@lammgeplauder.de"

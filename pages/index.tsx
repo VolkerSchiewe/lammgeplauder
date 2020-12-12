@@ -2,8 +2,19 @@ import Layout from '../components/Layout'
 import React, { useState } from "react";
 import Image from "next/image"
 import absoluteUrl from "next-absolute-url/index";
+import { GetServerSideProps, NextPage } from "next";
+import { getGraphqlClient } from "../utils/graphql-client";
+import { gql } from "graphql-request";
+import { Podcast } from "../types/dato-cms";
 
-const HomePage = () => {
+interface Props {
+  title: string
+  description: string
+  logo: string
+  logoAlt: string
+}
+
+const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt }) => {
   const [notificationOpen, openNotification] = useState(false)
 
   async function copyFeedToClipboard() {
@@ -15,12 +26,10 @@ const HomePage = () => {
 
   return (
     <Layout className={ "flex items-center h-screen flex-col bg-orange-300 space-y-3 pt-10 md:pt-16" }>
-      <Image className={ "rounded-full" } src={ "/lammgeplauder-logo-without-label.png" }
-             alt={ "Lamm mit Telefonhörer" }
-             width={ 200 } height={ 200 }/>
-      <h1 className={ "text-3xl sm:text-5xl text-center" }>Lammgeplauder Podcast</h1>
-      <span>Ein Podcast der EBU-Jugend</span>
-      <div className={ "grid gap-x-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" }>
+      <Image className={ "rounded-3xl" } src={ logo } alt={ logoAlt } width={ 200 } height={ 200 }/>
+      <h1 className={ "text-3xl sm:text-5xl text-center" }>{ title }</h1>
+      <span>{ description }</span>
+      <div className={ "grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pt-6" }>
         <a
           href={ "https://podcasts.google.com/feed/aHR0cHM6Ly9sYW1tZ2VwbGF1ZGVyLmRlL2FwaS9mZWVk?sa=X&ved=0CAMQ4aUDahcKEwig-KGuncbtAhUAAAAAHQAAAAAQAQ&hl=de" }>
           <Image src={ "/google-podcast-badge.svg" } alt={ "Bei Google Podcast anhören" } width={ 200 } height={ 50 }/>
@@ -62,4 +71,33 @@ const HomePage = () => {
   );
 }
 
+interface Response {
+  podcast: Podcast
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const client = getGraphqlClient()
+  const query = gql`
+    {
+      podcast{
+        title
+        description
+        logo {
+          url
+          alt
+        }
+      }
+    }
+  `
+  const { podcast } = await client.request<Response>(query)
+
+  return {
+    props: {
+      title: podcast.title,
+      description: podcast.description,
+      logo: podcast.logo.url,
+      logoAlt: podcast.logo.alt,
+    },
+  }
+}
 export default HomePage
