@@ -2,7 +2,7 @@ import Layout from '../components/Layout'
 import React, { useState } from "react";
 import Image from "next/image"
 import absoluteUrl from "next-absolute-url/index";
-import { GetServerSideProps, NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import { getGraphqlClient } from "../utils/graphql-client";
 import { gql } from "graphql-request";
 import { Podcast } from "../types/dato-cms";
@@ -75,7 +75,7 @@ interface Response {
   podcast: Podcast
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const client = getGraphqlClient()
   const query = gql`
     {
@@ -98,6 +98,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       logo: podcast.logo.url,
       logoAlt: podcast.logo.alt,
     },
+    revalidate: 3600 // seconds (equals 1 hour)
   }
 }
 export default HomePage
