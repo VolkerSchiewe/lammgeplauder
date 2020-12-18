@@ -16,4 +16,5 @@ export interface Episode {
   },
   description: string
   updatedAt: string
+  uniqueId: number
 }

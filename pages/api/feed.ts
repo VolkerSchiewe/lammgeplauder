@@ -27,6 +27,7 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
         name
         description
         updatedAt
+        uniqueId
         audio {
           url
           size
@@ -53,7 +54,7 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   for (const episode of allEpisodes) {
-    const guid = episode.name.toLowerCase().replace(" ", "-")
+    const guid = `${ episode.uniqueId }-${ episode.name.toLowerCase().replace(" ", "-") }`
     const duration = await getAudioDurationInSeconds(episode.audio.url)
     feed.addItem({
       title: episode.name,
