@@ -5,6 +5,7 @@ import { gql } from "graphql-request";
 import absoluteUrl from "next-absolute-url/index";
 import getAudioDurationInSeconds from "get-audio-duration";
 import { Episode, Podcast as PodcastType } from "../../types/dato-cms";
+import { getShortHash } from "../../utils/hash";
 
 interface DatoCmsResponse {
   podcast: PodcastType
@@ -27,7 +28,6 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
         name
         description
         updatedAt
-        uniqueId
         audio {
           url
           size
@@ -54,7 +54,8 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   for (const episode of allEpisodes) {
-    const guid = `${ episode.uniqueId }-${ episode.name.toLowerCase().replace(" ", "-") }`
+    const hash = await getShortHash("md5", episode.audio.url)
+    const guid = `${ episode.name.toLowerCase().replace(" ", "-") }-${ hash }`
     const duration = await getAudioDurationInSeconds(episode.audio.url)
     feed.addItem({
       title: episode.name,
