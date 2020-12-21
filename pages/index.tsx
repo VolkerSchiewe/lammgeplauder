@@ -55,7 +55,7 @@ const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt, backgrou
         </div>
       </div>
       <div
-        className={ `absolute w-full flex justify-end items-start p-5 ${ notificationOpen ? "opacity-100" : "opacity-0" } transition-opacity duration-500 ease-out ` }>
+        className={ `text-black absolute w-full flex justify-end items-start p-5 ${ notificationOpen ? "opacity-100" : "opacity-0" } transition-opacity duration-500 ease-out ` }>
         <div className=" bg-white rounded-lg border-gray-300 border p-3 shadow-lg">
           <div className="flex flex-row">
             <div className="px-2">
