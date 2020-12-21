@@ -1,13 +1,14 @@
-import React, { ReactNode } from 'react'
+import React, { CSSProperties, ReactNode } from 'react'
 import Head from 'next/head'
 
 type Props = {
   children?: ReactNode
   title?: string
   className?: string
+  style?: CSSProperties
 }
 
-const Layout = ({ children, title = 'Lammgeplauder Podcast', className }: Props) => (
+const Layout = ({ children, title = 'Lammgeplauder Podcast', className, style }: Props) => (
   <div>
     <Head>
       <title>{ title }</title>
@@ -18,7 +19,7 @@ const Layout = ({ children, title = 'Lammgeplauder Podcast', className }: Props)
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
     </Head>
-    <div className={ className }>
+    <div className={ className } style={ style }>
       { children }
     </div>
   </div>

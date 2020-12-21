@@ -6,6 +6,7 @@ import { GetStaticProps, NextPage } from "next";
 import { getGraphqlClient } from "../utils/graphql-client";
 import { gql } from "graphql-request";
 import { Podcast } from "../types/dato-cms";
+import { getContrastColor } from "../utils/contrast-color";
 
 interface Props {
   title: string
@@ -24,8 +25,10 @@ const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt }) => {
     setTimeout(() => openNotification(false), 2000)
   }
 
+  const bgColor = "#393434"
   return (
-    <Layout className={ "flex items-center h-screen flex-col bg-orange-300 space-y-3 pt-10 md:pt-16" }>
+    <Layout style={ { backgroundColor: bgColor, color: getContrastColor(bgColor.slice(1)) } }
+            className={ "flex items-center h-screen flex-col space-y-3 pt-10 md:pt-16" }>
       <Image className={ "rounded-3xl" } src={ logo } alt={ logoAlt } width={ 200 } height={ 200 }/>
       <h1 className={ "text-3xl sm:text-5xl text-center" }>{ title }</h1>
       <span>{ description }</span>
@@ -42,7 +45,7 @@ const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt }) => {
         </a>
 
         <div style={ { width: 200, height: 50 } } onClick={ copyFeedToClipboard }
-             className={ "border border-gray-600 rounded-md bg-white flex justify-center items-center cursor-pointer" }>
+             className={ "border border-gray-600 rounded-md bg-white flex justify-center items-center cursor-pointer text-black" }>
           <svg className="w-6 h-6 m-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={ 2 }
