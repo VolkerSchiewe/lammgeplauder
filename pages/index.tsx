@@ -13,9 +13,10 @@ interface Props {
   description: string
   logo: string
   logoAlt: string
+  backgroundColor: string
 }
 
-const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt }) => {
+const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt, backgroundColor = "#ffffff" }) => {
   const [notificationOpen, openNotification] = useState(false)
 
   async function copyFeedToClipboard() {
@@ -25,9 +26,8 @@ const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt }) => {
     setTimeout(() => openNotification(false), 2000)
   }
 
-  const bgColor = "#393434"
   return (
-    <Layout style={ { backgroundColor: bgColor, color: getContrastColor(bgColor.slice(1)) } }
+    <Layout style={ { backgroundColor: backgroundColor, color: getContrastColor(backgroundColor.slice(1)) } }
             className={ "flex items-center h-screen flex-col space-y-3 pt-10 md:pt-16" }>
       <Image className={ "rounded-3xl" } src={ logo } alt={ logoAlt } width={ 200 } height={ 200 }/>
       <h1 className={ "text-3xl sm:text-5xl text-center" }>{ title }</h1>
@@ -82,9 +82,12 @@ export const getStaticProps: GetStaticProps = async () => {
   const client = getGraphqlClient()
   const query = gql`
     {
-      podcast{
+      podcast {
         title
         description
+        homepageBackgroundColor {
+          hex
+        }
         logo {
           url
           alt
@@ -100,6 +103,7 @@ export const getStaticProps: GetStaticProps = async () => {
       description: podcast.description,
       logo: podcast.logo.url,
       logoAlt: podcast.logo.alt,
+      backgroundColor: podcast.homepageBackgroundColor.hex
     },
     revalidate: 3600 // seconds (equals 1 hour)
   }

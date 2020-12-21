@@ -1,6 +1,9 @@
 export interface Podcast {
   title: string
   description: string
+  homepageBackgroundColor: {
+    hex: string
+  }
   logo: {
     url: string
     alt: string
