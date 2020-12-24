@@ -26,3 +26,5 @@ jobs:
           build: yarn build
           start: yarn start
           wait-on: http://localhost:3000
+        env:
+          DATOCMS_API_TOKEN: ${{ secrets.DATOCMS_API_TOKEN }}
