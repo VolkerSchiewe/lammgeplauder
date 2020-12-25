@@ -80,7 +80,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const db = firestore()
   const podcast = (await db.collection("podcast").doc("Lammgeplauder").get()).data() as PodcastType
 
-
   return {
     props: {
       title: podcast.name,

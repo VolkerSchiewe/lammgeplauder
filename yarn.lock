@@ -2663,7 +2663,7 @@ colorspace@1.1.x:
     color "3.0.x"
     text-hex "1.0.x"
 
-combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
+combined-stream@^1.0.6, combined-stream@~1.0.6:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/combined-stream/-/combined-stream-1.0.8.tgz#c3d45a8b34fd730631a110a8a2520682b31d5a7f"
   integrity sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==
@@ -3962,11 +3962,6 @@ extglob@^2.0.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-extract-files@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/extract-files/-/extract-files-9.0.0.tgz#8a7744f2437f81f5ed3250ed9f1550de902fe54a"
-  integrity sha512-CvdFfHkC95B4bBBk36hcEmvdR2awOdhhVUYH6S/zrVj3477zven/fJMYg7121h4T1xHZC+tetUpubpAhxwI7hQ==
-
 extract-zip@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/extract-zip/-/extract-zip-1.7.0.tgz#556cc3ae9df7f452c493a0cfb51cc30277940927"
@@ -4244,15 +4239,6 @@ forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
   integrity sha1-+8cfDEGt6zf5bFd60e1C2P2sypE=
-
-form-data@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/form-data/-/form-data-3.0.0.tgz#31b7e39c85f1355b7139ee0c647cf0de7f83c682"
-  integrity sha512-CKMFDglpbMi6PyN+brwB9Q/GOw0eAnsrEZDgcsH5Krhz5Od/haKHAX0NmQfha2zPPz0JpWzA7GJHGSnvCRLWsg==
-  dependencies:
-    asynckit "^0.4.0"
-    combined-stream "^1.0.8"
-    mime-types "^2.1.12"
 
 form-data@~2.3.2:
   version "2.3.3"
@@ -4630,20 +4616,6 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
   integrity sha512-WjKPNJF79dtJAVniUlGGWHYGz2jWxT6VhN/4m1NdkbZ2nOsEF+cI1Edgql5zCRhs/VsQYRvrXctxktVXZUkixw==
-
-graphql-request@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/graphql-request/-/graphql-request-3.3.0.tgz#1b9003f34b73cd40d691803d2d422fde5c713af3"
-  integrity sha512-NHj65WSIUh8j7TBYgzWU0fqvLfxrqFDrLG8nZUh+IREZw50ljR6JXlXRkr52/fL/46wpItiQNLDrG+UZI+KmzA==
-  dependencies:
-    cross-fetch "^3.0.6"
-    extract-files "^9.0.0"
-    form-data "^3.0.0"
-
-graphql@^15.4.0:
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-15.4.0.tgz#e459dea1150da5a106486ba7276518b5295a4347"
-  integrity sha512-EB3zgGchcabbsU9cFe1j+yxdzKQKAbGUWRb13DsrsMN1yyfmmIq+2+L5MqVWcDCE4V89R5AyUOi7sMOGxdsYtA==
 
 growly@^1.3.0:
   version "1.3.0"
