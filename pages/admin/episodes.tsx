@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { NextPage } from "next";
 import LayoutAdmin from "../../components/LayoutAdmin";
 import formatDuration from "../../utils/formatDuration";
+import Modal from "../../components/Modal";
+import EditEpisode from "../../components/EditEpisode";
 
 interface Episode {
   title: string
@@ -43,8 +45,13 @@ const episodes: Array<Episode> = [
   }
 ]
 const EpisodesPage: NextPage = () => {
+  const [open, setOpen] = useState(false)
   return (
     <LayoutAdmin>
+      <Modal open={ open } onClose={ () => setOpen(false) }>
+        <EditEpisode/>
+      </Modal>
+
       <div className={ "p-5 space-y-5" }>
         <div>
           <button className={ "border rounded py-1 px-3 inline-flex" }>
@@ -66,7 +73,7 @@ const EpisodesPage: NextPage = () => {
               <p className={ "truncate" }>{ description }</p>
             </div>
             <div className={ "col-start-2 flex justify-end space-x-3" }>
-              <button className={ "border rounded py-1 px-3" }>{ "Bearbeiten" }</button>
+              <button className={ "border rounded py-1 px-3" } onClick={ () => setOpen(true) }>{ "Bearbeiten" }</button>
               <button
                 className={ "border rounded py-1 px-3 text-red-800" }>{ isHidden ? "Veröffentlichen" : "Verstecken" }</button>
             </div>

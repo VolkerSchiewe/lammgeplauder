@@ -5,10 +5,11 @@ interface Props {
   multiline?: boolean
   lines?: number
   placeholder?: string
+  type?: "date" | "text"
 }
 
 
-const TexField: React.FC<Props> = ({ label, multiline, lines, placeholder }) => (
+const TexField: React.FC<Props> = ({ label, multiline, lines, placeholder, type = "text" }) => (
   <label className="block">
     <span className="text-gray-700">{ label }</span>
     { multiline ? (
@@ -16,7 +17,7 @@ const TexField: React.FC<Props> = ({ label, multiline, lines, placeholder }) => 
         className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
         rows={ lines }/>
     ) : (
-      <input type="text"
+      <input type={ type }
              className="mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
              placeholder={ placeholder }/>
     ) }
