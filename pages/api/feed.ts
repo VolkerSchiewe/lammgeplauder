@@ -33,7 +33,7 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   for (const episode of episodes) {
-    const hash = episode.audio.md5Hash.slice(0, 6)
+    const hash = episode.audio.md5Hash.slice(0, 10)
     const guid = `${ episode.name.toLowerCase().replace(" ", "-") }-${ hash }`
     feed.addItem({
       title: episode.name,
