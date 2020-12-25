@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import Image from "next/image"
 import absoluteUrl from "next-absolute-url/index";
 import { GetStaticProps, NextPage } from "next";
-import { getGraphqlClient } from "../utils/graphql-client";
-import { gql } from "graphql-request";
-import { Podcast } from "../types/dato-cms";
+import { Podcast as PodcastType } from "../types/models";
 import { getContrastColor } from "../utils/contrast-color";
+import initFirebase from "../utils/firebase-admin";
+import { firestore } from "firebase-admin";
 
 interface Props {
   title: string
@@ -74,36 +74,20 @@ const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt, backgrou
   );
 }
 
-interface Response {
-  podcast: Podcast
-}
 
 export const getStaticProps: GetStaticProps = async () => {
-  const client = getGraphqlClient()
-  const query = gql`
-    {
-      podcast {
-        title
-        description
-        homepageBackgroundColor {
-          hex
-        }
-        logo {
-          url
-          alt
-        }
-      }
-    }
-  `
-  const { podcast } = await client.request<Response>(query)
+  initFirebase()
+  const db = firestore()
+  const podcast = (await db.collection("podcast").doc("Lammgeplauder").get()).data() as PodcastType
+
 
   return {
     props: {
-      title: podcast.title,
+      title: podcast.name,
       description: podcast.description,
-      logo: podcast.logo.url,
-      logoAlt: podcast.logo.alt,
-      backgroundColor: podcast.homepageBackgroundColor.hex
+      logo: podcast.logoUrl,
+      logoAlt: podcast.logoAlt,
+      backgroundColor: podcast.homepageBackgroundColor
     },
     revalidate: 3600 // seconds (equals 1 hour)
   }

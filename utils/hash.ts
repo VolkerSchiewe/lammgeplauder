@@ -6,7 +6,8 @@ export function getShortHash(hashName: string, path: string) {
       const hash = crypto.createHash(hashName);
       const res = await fetch(path)
       hash.update(Buffer.from(await res.arrayBuffer()))
-      resolve(hash.digest('hex').slice(0, 6))
+      const hashLong = hash.digest('hex')
+      resolve(hashLong.slice(0, 6))
     } catch (e) {
       reject(e)
     }
