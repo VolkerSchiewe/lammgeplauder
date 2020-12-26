@@ -5,6 +5,6 @@ import { firestore } from "firebase-admin";
 export default async function getPodcast(): Promise<Podcast> {
   initFirebase()
   const db = firestore()
-  const podcastDocument = await db.collection("podcast").doc("Lammgeplauder").get()
+  const podcastDocument = await db.collection("podcast").doc(process.env.FIREBASE_PODCAST_DOCUMENT as string).get()
   return podcastDocument.data() as Podcast
 }
