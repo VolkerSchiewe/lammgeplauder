@@ -3,10 +3,8 @@ import React, { useState } from "react";
 import Image from "next/image"
 import absoluteUrl from "next-absolute-url/index";
 import { GetStaticProps, NextPage } from "next";
-import { Podcast as PodcastType } from "../types/models";
 import { getContrastColor } from "../utils/contrast-color";
-import initFirebase from "../utils/firebase-admin";
-import { firestore } from "firebase-admin";
+import getPodcast from "../utils/db/podcast";
 
 interface Props {
   title: string
@@ -76,9 +74,7 @@ const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt, backgrou
 
 
 export const getStaticProps: GetStaticProps = async () => {
-  initFirebase()
-  const db = firestore()
-  const podcast = (await db.collection("podcast").doc("Lammgeplauder").get()).data() as PodcastType
+  const podcast = await getPodcast()
 
   return {
     props: {

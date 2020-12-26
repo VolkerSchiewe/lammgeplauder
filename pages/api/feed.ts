@@ -1,21 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Podcast from 'podcast';
 import absoluteUrl from "next-absolute-url/index";
-import { Episode, Podcast as PodcastType } from "../../types/models";
-import initFirebase from "../../utils/firebase-admin";
-import { firestore } from "firebase-admin"
+import getEpisodes from "../../utils/db/episodes";
+import getPodcast from "../../utils/db/podcast";
 
 const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
-  initFirebase()
-  const db = firestore()
-  const episodesCollection = await db.collection("episodes").get()
-  const podcast = (await db.collection("podcast").doc("Lammgeplauder").get()).data() as PodcastType
-  const episodes: Array<Episode> = []
-  episodesCollection.forEach((doc) => {
-    const data = doc.data() as Episode;
-    episodes.push(data)
-  })
-
+  const episodes = await getEpisodes()
+  const podcast = await getPodcast()
   const { origin } = absoluteUrl(req)
   const feed = new Podcast({
     title: podcast.name,

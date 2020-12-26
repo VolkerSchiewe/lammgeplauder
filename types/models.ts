@@ -19,4 +19,5 @@ export interface Episode {
   },
   description: string
   updatedAt: firestore.Timestamp
+  published: boolean
 }
