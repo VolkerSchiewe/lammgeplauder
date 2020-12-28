@@ -8,7 +8,7 @@ import { Podcast } from "../../types/models";
 import { useForm } from "react-hook-form";
 import { getContrastColor } from "../../utils/contrast-color";
 import notifier from "simple-react-notifications2";
-import "simple-react-notifications/dist/index.css";
+import "simple-react-notifications2/dist/index.css";
 import { ValidationError } from "../../utils/db/validation";
 
 interface Props {
@@ -68,7 +68,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     props: {
       podcast: podcast,
     },
-    revalidate: 3600 // seconds (equals 1 hour)
+    revalidate: 1
   }
 }
 

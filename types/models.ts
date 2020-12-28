@@ -1,5 +1,3 @@
-import { firestore } from "firebase-admin/lib/firestore";
-
 export interface Podcast {
   name: string
   description: string
@@ -9,15 +7,16 @@ export interface Podcast {
 }
 
 export interface Episode {
+  id?: string
   name: string,
   audio: {
     mimeType: string;
-    size: string;
+    size: number;
     url: string
     duration: number
     md5Hash: string
   },
   description: string
-  updatedAt: firestore.Timestamp
+  publishingDate: string
   published: boolean
 }
