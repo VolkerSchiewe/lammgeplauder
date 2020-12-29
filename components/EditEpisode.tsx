@@ -9,6 +9,8 @@ import CheckboxField from "./forms/CheckboxField";
 import notifier from "simple-react-notifications2";
 import "simple-react-notifications2/dist/index.css";
 import uploadFile from "../utils/db/uploadFile";
+import getAudioDuration from "../utils/auth/getAudioDuration";
+import { getShortHash } from "../utils/hash";
 
 interface Props {
   episode?: Episode
@@ -29,20 +31,24 @@ const EditEpisode: React.FC<Props> = ({ episode, onClose }) => {
   const { audio, ...defaultValues } = episode || {}
   const { errors, handleSubmit, register } = useForm<Episode>({ defaultValues })
 
+  async function uploadAudio(file: File): Promise<{ url: string, duration: number, hash: string }> {
+    const audioUrl = await uploadFile(file)
+    const duration = await getAudioDuration(file)
+    return { url: audioUrl, duration, hash: await getShortHash("md5", file) }
+  }
+
   async function onSubmit(data: EditEpisode) {
-    const imageUrl = isNewEpisode ? await uploadFile(data.audio[0]) : undefined
+    const audio = isNewEpisode ? await uploadAudio(data.audio[0]) : undefined
     const res = await fetch(`/api/episodes/${ episode ? episode.id : "" }`, {
       method: "POST",
       body: JSON.stringify({
         ...data,
-        audio: isNewEpisode ? {
-          // TODO get duration
-          duration: 0,
-          url: imageUrl,
+        audio: isNewEpisode && audio ? {
+          duration: audio.duration,
+          url: audio.url,
           size: data.audio[0].size,
-          // TODO generate hash
-          md5Hash: "",
-          mimeType: "audio/mpeg",
+          md5Hash: audio.hash,
+          mimeType: data.audio[0].type,
         } : undefined
       })
     })
