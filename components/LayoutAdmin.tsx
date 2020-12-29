@@ -1,8 +1,7 @@
 import React, { CSSProperties, ReactNode } from 'react'
-import { useSession } from "next-auth/client";
-import { useRouter } from "next/router";
 import Navbar from "./Navbar";
 import Layout from "./Layout";
+import { useUser } from "../utils/auth/useUser";
 
 type Props = {
   children?: ReactNode
@@ -11,16 +10,11 @@ type Props = {
 }
 
 const LayoutAdmin = ({ children, className = "", style }: Props) => {
-  const [session, loading] = useSession()
-  const router = useRouter()
-  if (!loading && !session) {
-    router.push(`/api/auth/signin`)
-    return null
-  }
+  const { user, logout } = useUser()
   return (
-    session ? (
+    user ? (
       <Layout className={ `${ className } min-h-screen` } style={ style }>
-        <Navbar/>
+        <Navbar logout={ logout }/>
         { children }
       </Layout>
     ) : null

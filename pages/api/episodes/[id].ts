@@ -1,17 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/client";
 import { firestore } from "firebase-admin";
-import initFirebase from "../../../utils/db/firebase-admin";
+import { initFirebaseAdmin } from "../../../utils/auth/firebaseAdmin";
+import protectedApi from "../../../utils/auth/protectedApi";
 
-const setPodcast = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log("set episode", req.query)
-  const session = await getSession({ req })
-  if (!session) {
-    res.status(401)
-    res.end()
-    return
-  }
-  initFirebase()
+const setEpisode = async (req: NextApiRequest, res: NextApiResponse) => {
+  console.log("set episode")
+  initFirebaseAdmin()
   const { query: { id }, } = req
   if (req.method === "POST") {
     const data = JSON.parse(req.body)
@@ -19,7 +13,10 @@ const setPodcast = async (req: NextApiRequest, res: NextApiResponse) => {
     const updatedData = { ...oldData, ...data }
     await firestore().collection(process.env.FIREBASE_PODCAST_DOCUMENT as string).doc(id as string).set(updatedData)
     res.end()
+  } else {
+    res.send("Not implemented")
+    res.end()
   }
 }
 
-export default setPodcast
+export default protectedApi(setEpisode)

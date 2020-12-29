@@ -31,10 +31,10 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
       guid: guid,
       enclosure: {
         url: episode.audio.url,
-        size: episode.audio.size,
+        size: episode.audio.size.toString(),
         type: episode.audio.mimeType
       },
-      date: episode.updatedAt.toDate().toISOString(),
+      date: episode.publishingDate,
       description: episode.description,
       itunesDuration: episode.audio.duration,
       url: `${ origin }#${ guid }`

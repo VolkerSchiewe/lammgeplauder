@@ -5,7 +5,12 @@ const menuItems = [
   { label: "Podcast & Website", href: "/admin" },
   { label: "Episoden", href: "/admin/episodes" },
 ]
-const Navbar: React.FC = () => {
+
+interface Props {
+  logout: () => void
+}
+
+const Navbar: React.FC<Props> = ({ logout }) => {
   const [open, setOpen] = useState(false)
 
   function toggleOpen() {
@@ -15,7 +20,7 @@ const Navbar: React.FC = () => {
   const router = useRouter()
   return (
     <nav className="bg-gray-800">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div className="max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex items-center justify-between h-16">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             <button onClick={ toggleOpen }
@@ -50,7 +55,17 @@ const Navbar: React.FC = () => {
               </div>
             </div>
           </div>
-
+          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <button onClick={ logout }
+                    className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+              <span className="sr-only">Logout</span>
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={ 2 }
+                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
