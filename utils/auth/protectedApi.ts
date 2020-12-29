@@ -8,8 +8,9 @@ const protectedApi = (handler: NextApiHandler) => (req: NextApiRequest, res: Nex
     console.log("Unauthorized", req.url)
     res.status(401).end()
     return
+  } else {
+    handler(req, res)
   }
-  handler(req, res)
 }
 
 export default protectedApi

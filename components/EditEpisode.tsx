@@ -5,6 +5,10 @@ import { Episode } from "../types/models";
 import ModalBody from "./modal/ModalBody";
 import ModalActions from "./modal/ModalActions";
 import Button from "./Button";
+import CheckboxField from "./forms/CheckboxField";
+import notifier from "simple-react-notifications2";
+import "simple-react-notifications2/dist/index.css";
+import uploadFile from "../utils/db/uploadFile";
 
 interface Props {
   episode?: Episode
@@ -15,18 +19,38 @@ interface EditEpisode {
   name: string
   description: string
   publishingDate: string
+  published: boolean
+  audio: FileList
 }
 
+
 const EditEpisode: React.FC<Props> = ({ episode, onClose }) => {
-  const { errors, handleSubmit, register } = useForm<Episode>({ defaultValues: episode })
-  console.log(episode)
+  const isNewEpisode = !episode
+  const { audio, ...defaultValues } = episode || {}
+  const { errors, handleSubmit, register } = useForm<Episode>({ defaultValues })
 
   async function onSubmit(data: EditEpisode) {
+    const imageUrl = isNewEpisode ? await uploadFile(data.audio[0]) : undefined
     const res = await fetch(`/api/episodes/${ episode ? episode.id : "" }`, {
       method: "POST",
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        ...data,
+        audio: isNewEpisode ? {
+          // TODO get duration
+          duration: 0,
+          url: imageUrl,
+          size: data.audio[0].size,
+          // TODO generate hash
+          md5Hash: "",
+          mimeType: "audio/mpeg",
+        } : undefined
+      })
     })
-    console.log(res)
+    if (res.ok)
+      notifier.success(isNewEpisode ? "Created" : "Updated")
+    else
+      notifier.error("Fehler")
+    onClose()
   }
 
   return (
@@ -36,14 +60,20 @@ const EditEpisode: React.FC<Props> = ({ episode, onClose }) => {
               id={ `edit-episode-${ episode ? episode.id : "new" }` }>
           <div className="mt-3 flex flex-col">
             <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-              { "Episode bearbeiten" }
+              { `Episode ${ episode ? "bearbeiten" : "erstellen" }` }
             </h3>
-            <div className="mt-2">
-              <TextField ref={ register } name={ "name" } errors={ errors } label={ "Titel" }/>
-              <TextField ref={ register } name={ "description" } errors={ errors } label={ "Beschreibung" } multiline
+            <div className="mt-2 flex flex-col space-y-2">
+              <TextField ref={ register({ required: "Required" }) } name={ "name" } errors={ errors }
+                         label={ "Titel" }/>
+              <TextField ref={ register({ required: true }) } name={ "description" } errors={ errors }
+                         label={ "Beschreibung" } multiline
                          lines={ 3 }/>
-              <TextField ref={ register } name={ "publishingDate" } errors={ errors } label={ "Startdatum" }
+              <TextField ref={ register({ required: true }) } name={ "publishingDate" } errors={ errors }
+                         label={ "Startdatum" }
                          type={ "date" }/>
+              <CheckboxField label={ "Veröffentlichen" } name={ "published" } ref={ register }/>
+              <input disabled={ !isNewEpisode } type={ "file" } name={ "audio" }
+                     ref={ isNewEpisode ? register({ required: true }) : undefined } accept={ "audio/mp3" }/>
             </div>
           </div>
         </form>
