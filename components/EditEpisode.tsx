@@ -9,7 +9,7 @@ import CheckboxField from "./forms/CheckboxField";
 import notifier from "simple-react-notifications2";
 import "simple-react-notifications2/dist/index.css";
 import uploadFile from "../utils/db/uploadFile";
-import getAudioDuration from "../utils/auth/getAudioDuration";
+import getAudioDuration from "../utils/getAudioDuration";
 import { getShortHash } from "../utils/hash";
 import FileField from "./forms/FileField";
 
