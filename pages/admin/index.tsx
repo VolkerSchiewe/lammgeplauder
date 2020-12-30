@@ -105,8 +105,7 @@ const EditPodcast: NextPage = () => {
                       label={ "Homepage Hintergrundfarbe" }
                       placeholder={ "#FFFFFF" } errors={ errors }/>
             <div style={ { backgroundColor: color, color: getContrastColor(color) } }
-                 className={ "w-20 h-10 rounded flex justify-center items-center" }>
-              Preview
+                 className={ "w-10 h-10 rounded-full flex justify-center items-center" }>
             </div>
           </div>
           <div className={ "flex-grow" }/>
