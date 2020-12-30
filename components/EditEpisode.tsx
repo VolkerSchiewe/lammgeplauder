@@ -11,6 +11,7 @@ import "simple-react-notifications2/dist/index.css";
 import uploadFile from "../utils/db/uploadFile";
 import getAudioDuration from "../utils/auth/getAudioDuration";
 import { getShortHash } from "../utils/hash";
+import FileField from "./forms/FileField";
 
 interface Props {
   episode?: Episode
@@ -87,8 +88,8 @@ const EditEpisode: React.FC<Props> = ({ episode, onClose }) => {
                          label={ "Startdatum" }
                          type={ "date" }/>
               <CheckboxField label={ "Veröffentlichen" } name={ "published" } ref={ register }/>
-              <input disabled={ !isNewEpisode } type={ "file" } name={ "audio" }
-                     ref={ isNewEpisode ? register({ required: true }) : undefined } accept={ "audio/mp3" }/>
+              <FileField label={ "Audio Datei" } name={ "audio" } disabled={ !isNewEpisode } accept={ "audio/mp3" }
+                         ref={ isNewEpisode ? register({ required: true }) : undefined }/>
             </div>
           </div>
         </form>

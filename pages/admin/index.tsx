@@ -15,7 +15,7 @@ interface Props {
   podcast: Podcast
 }
 
-const AdminPage: NextPage<Props> = ({ podcast }) => {
+const EditPodcast: NextPage<Props> = ({ podcast }) => {
   const { register, handleSubmit, watch, setError, errors } = useForm<Podcast>({ defaultValues: podcast })
 
   async function onSubmit(data: Podcast) {
@@ -72,4 +72,4 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   }
 }
 
-export default AdminPage
+export default EditPodcast
