@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "./forms/TextField";
 import { useForm } from "react-hook-form";
 import { Episode } from "../types/models";
@@ -30,14 +30,17 @@ const EditEpisode: React.FC<Props> = ({ episode, onClose }) => {
   const isNewEpisode = !episode
   const { audio, ...defaultValues } = episode || {}
   const { errors, handleSubmit, register } = useForm<Episode>({ defaultValues })
+  const [loading, isLoading] = useState<boolean>(false)
+  const [uploadState, setUploadState] = useState<number>(0)
 
   async function uploadAudio(file: File): Promise<{ url: string, duration: number, hash: string }> {
-    const audioUrl = await uploadFile(file)
+    const audioUrl = await uploadFile(file, setUploadState)
     const duration = await getAudioDuration(file)
     return { url: audioUrl, duration, hash: await getShortHash("md5", file) }
   }
 
   async function onSubmit(data: EditEpisode) {
+    isLoading(true)
     const audio = isNewEpisode ? await uploadAudio(data.audio[0]) : undefined
     const res = await fetch(`/api/episodes/${ episode ? episode.id : "" }`, {
       method: "POST",
@@ -52,6 +55,7 @@ const EditEpisode: React.FC<Props> = ({ episode, onClose }) => {
         } : undefined
       })
     })
+    isLoading(false)
     if (res.ok)
       notifier.success(isNewEpisode ? "Created" : "Updated")
     else
@@ -62,6 +66,11 @@ const EditEpisode: React.FC<Props> = ({ episode, onClose }) => {
   return (
     <>
       <ModalBody>
+        { loading && (
+          <div className={ "fixed inset-0 bg-gray-800 opacity-75 flex justify-center items-center" }>
+            <span className={ "text-xl font-bold text-white" }>{ (`Loading: ${ Math.floor(uploadState) }%`) }</span>
+          </div>
+        ) }
         <form onSubmit={ handleSubmit(onSubmit) }
               id={ `edit-episode-${ episode ? episode.id : "new" }` }>
           <div className="mt-3 flex flex-col">

@@ -51,7 +51,12 @@ const EpisodesPage: NextPage = () => {
             <div key={ name }
                  className={ `grid grid-cols-2 gap-3 border rounded shadow-sm p-5 ${ published ? "bg-white" : "bg-gray-100 text-gray-600" }` }>
               <div className={ "flex flex-col space-y-3" } key={ name }>
-                <span className={ "text-2xl font-bold" }>{ name }</span>
+                <div className={ "flex items-center space-x-5" }>
+                  <span className={ "text-2xl font-bold" }>{ name }</span>
+                  { !published && (
+                    <span className={ "border-2 border-red-800 rounded px-2 py-1" }>{ "Unveröffentlicht" }</span>
+                  ) }
+                </div>
                 <span>{ Intl.DateTimeFormat("de").format(new Date(publishingDate)) }</span>
                 <span>{ `${ formatBytes(audio.size) } - ${ formatDuration(audio.duration) }` }</span>
               </div>
@@ -59,10 +64,9 @@ const EpisodesPage: NextPage = () => {
                 <p className={ "truncate" }>{ description }</p>
               </div>
               <div className={ "col-start-2 flex justify-end space-x-3" }>
-                <button className={ "border rounded py-1 px-3" }
-                        onClick={ () => setModalEpisode(episode) }>{ "Bearbeiten" }</button>
-                <button
-                  className={ "border rounded py-1 px-3 text-red-800" }>{ published ? "Verstecken" : "Veröffentlichen" }</button>
+                <button className={ "border rounded py-1 px-3" } onClick={ () => setModalEpisode(episode) }>
+                  { "Bearbeiten" }
+                </button>
               </div>
             </div>
           );
