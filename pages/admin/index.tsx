@@ -24,7 +24,10 @@ const EditPodcast: NextPage = () => {
 
   function fetchPodcast() {
     fetch("/api/podcast", { method: "GET" })
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok)
+          return res.json();
+      })
       .then(data => {
         reset({ ...data, logo: "" })
         setPodcast(data);

@@ -30,7 +30,7 @@ interface EditEpisode {
 const EditEpisode: React.FC<Props> = ({ episode, onClose }) => {
   const isNewEpisode = !episode
   const { audio, ...defaultValues } = episode || {}
-  const { errors, handleSubmit, register } = useForm<Episode>({ defaultValues })
+  const { errors, handleSubmit, register, control } = useForm<Episode>({ defaultValues })
   const [loading, isLoading] = useState<boolean>(false)
   const [uploadState, setUploadState] = useState<number>(0)
 
@@ -89,7 +89,8 @@ const EditEpisode: React.FC<Props> = ({ episode, onClose }) => {
                          type={ "date" }/>
               <CheckboxField label={ "Veröffentlichen" } name={ "published" } ref={ register }/>
               <FileField label={ "Audio Datei" } name={ "audio" } disabled={ !isNewEpisode } accept={ "audio/mp3" }
-                         ref={ isNewEpisode ? register({ required: true }) : undefined }/>
+                         ref={ isNewEpisode ? register({ required: true }) : undefined } control={ control }
+                         errors={ errors }/>
             </div>
           </div>
         </form>

@@ -30,7 +30,7 @@ const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt, backgrou
       <Image className={ "rounded-3xl" } src={ logo } alt={ logoAlt } width={ 200 } height={ 200 }/>
       <h1 className={ "text-3xl sm:text-5xl text-center" }>{ title }</h1>
       <span>{ description }</span>
-      <div className={ "grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pt-6" }>
+      <div className={ "grid gap-2 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pt-6" }>
         <a
           href={ "https://podcasts.google.com/feed/aHR0cHM6Ly9sYW1tZ2VwbGF1ZGVyLmRlL2FwaS9mZWVk?sa=X&ved=0CAMQ4aUDahcKEwig-KGuncbtAhUAAAAAHQAAAAAQAQ&hl=de" }>
           <Image src={ "/google-podcast-badge.svg" } alt={ "Bei Google Podcast anhören" } width={ 200 } height={ 50 }/>
