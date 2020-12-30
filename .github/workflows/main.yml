@@ -27,8 +27,8 @@ jobs:
           start: yarn start
           wait-on: http://localhost:3000
         env:
-          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
+          NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY }}
           FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
           FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
-          FIREBASE_DATABASE_URL: ${{ secrets.FIREBASE_DATABASE_URL }}
           FIREBASE_PODCAST_DOCUMENT: ${{ secrets.FIREBASE_PODCAST_DOCUMENT }}
