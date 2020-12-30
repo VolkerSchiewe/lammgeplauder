@@ -17,8 +17,10 @@ const LayoutAdmin = ({ children, className = "", style }: Props) => {
         <Navbar logout={ logout }/>
         { children }
       </Layout>
-    ) : null
+    ) : (
+      <div>{ "Unauthorized" }</div>
+    )
   )
 }
 
-export default LayoutAdmin
+export default React.memo(LayoutAdmin)

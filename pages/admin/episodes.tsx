@@ -6,6 +6,7 @@ import Modal from "../../components/modal/Modal";
 import EditEpisode from "../../components/EditEpisode";
 import { Episode } from "../../types/models";
 import formatBytes from "../../utils/formatBytes";
+import notifier from "simple-react-notifications2";
 
 
 const EpisodesPage: NextPage = () => {
@@ -19,8 +20,15 @@ const EpisodesPage: NextPage = () => {
 
   function fetchEpisodes() {
     fetch("/api/episodes", { method: "GET" })
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok)
+          return res.json();
+        throw new Error("Unauthorized")
+      })
       .then(data => setEpisodes(data))
+      .catch(e => {
+        notifier.error(e.message)
+      })
   }
 
   useEffect(() => {

@@ -3,9 +3,7 @@ import { UserData } from "./mapUserData";
 
 export function getUserFromCookie(): UserData | void {
   const cookie = cookies.get('auth')
-  if (!cookie) {
-    return
-  }
+  if (!cookie) return
   return JSON.parse(cookie)
 }
 

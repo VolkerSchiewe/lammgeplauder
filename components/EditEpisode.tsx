@@ -12,6 +12,7 @@ import uploadFile from "../utils/db/uploadFile";
 import getAudioDuration from "../utils/getAudioDuration";
 import { getShortHash } from "../utils/hash";
 import FileField from "./forms/FileField";
+import { FirebaseError } from "@firebase/util";
 
 interface Props {
   episode?: Episode
@@ -41,27 +42,35 @@ const EditEpisode: React.FC<Props> = ({ episode, onClose }) => {
   }
 
   async function onSubmit(data: EditEpisode) {
-    isLoading(true)
-    const audio = isNewEpisode ? await uploadAudio(data.audio[0]) : undefined
-    const res = await fetch(`/api/episodes/${ episode ? episode.id : "" }`, {
-      method: "POST",
-      body: JSON.stringify({
-        ...data,
-        audio: isNewEpisode && audio ? {
-          duration: audio.duration,
-          url: audio.url,
-          size: data.audio[0].size,
-          md5Hash: audio.hash,
-          mimeType: data.audio[0].type,
-        } : undefined
+    try {
+      isLoading(true)
+      const audio = isNewEpisode ? await uploadAudio(data.audio[0]) : undefined
+      const res = await fetch(`/api/episodes/${ episode ? episode.id : "" }`, {
+        method: "POST",
+        body: JSON.stringify({
+          ...data,
+          audio: isNewEpisode && audio ? {
+            duration: audio.duration,
+            url: audio.url,
+            size: data.audio[0].size,
+            md5Hash: audio.hash,
+            mimeType: data.audio[0].type,
+          } : undefined
+        })
       })
-    })
-    isLoading(false)
-    if (res.ok)
-      notifier.success(isNewEpisode ? "Created" : "Updated")
-    else
-      notifier.error("Fehler")
-    onClose()
+      if (res.ok)
+        notifier.success(isNewEpisode ? "Episode erstellt" : "Episode geändert")
+      else
+        notifier.error("Fehler")
+      onClose()
+    } catch (e) {
+      if (e instanceof FirebaseError)
+        notifier.error("Unauthorized")
+      else throw e
+    } finally {
+      isLoading(false)
+    }
+
   }
 
   return (

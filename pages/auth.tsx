@@ -19,7 +19,7 @@ const firebaseAuthConfig: firebaseui.auth.Config = {
   signInSuccessUrl: '/admin',
   credentialHelper: 'none',
   callbacks: {
-    signInSuccessWithAuthResult: ({ user }: any) => {
+    signInSuccessWithAuthResult: ({ user }) => {
       mapUserData(user).then(userData => setUserCookie(userData))
       return true
     },

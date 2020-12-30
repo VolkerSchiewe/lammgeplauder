@@ -12,6 +12,7 @@ import { ValidationError } from "../../utils/db/validation";
 import FileField from "../../components/forms/FileField";
 import getImageDimensions from "../../utils/getImageDimensions";
 import uploadFile from "../../utils/db/uploadFile";
+import { FirebaseError } from "@firebase/util";
 
 
 interface EditPodcast extends Omit<Podcast, "logoUrl"> {
@@ -27,12 +28,15 @@ const EditPodcast: NextPage = () => {
       .then(res => {
         if (res.ok)
           return res.json();
+        else throw Error("Unauthorized")
       })
       .then(data => {
         reset({ ...data, logo: "" })
         setPodcast(data);
       })
-      .catch(console.error)
+      .catch(e => {
+        notifier.error(e.message)
+      })
   }
 
   useEffect(() => {
@@ -40,22 +44,27 @@ const EditPodcast: NextPage = () => {
   }, [])
 
   async function onSubmit(data: EditPodcast) {
-    const logoUrl = await uploadFile(data.logo[0])
-
-    const res = await fetch("/api/podcast", {
-      method: "POST",
-      body: JSON.stringify({ ...data, logo: undefined, logoUrl })
-    })
-    if (res.status === 200) {
-      fetchPodcast()
-      notifier.success("Podcast updated");
-    } else {
-      notifier.error("Fehler")
-      const errors = await res.json()
-      errors.forEach((error: ValidationError) => setError(error.field as any, {
-        type: "backend",
-        message: error.message
-      }))
+    try {
+      const logoUrl = await uploadFile(data.logo[0])
+      const res = await fetch("/api/podcast", {
+        method: "POST",
+        body: JSON.stringify({ ...data, logo: undefined, logoUrl })
+      })
+      if (res.status === 200) {
+        fetchPodcast()
+        notifier.success("Podcast geändert");
+      } else {
+        notifier.error("Fehler")
+        const errors = await res.json()
+        errors.forEach((error: ValidationError) => setError(error.field as any, {
+          type: "backend",
+          message: error.message
+        }))
+      }
+    } catch (e) {
+      if (e instanceof FirebaseError)
+        notifier.error("Unauthorized")
+      else throw e
     }
   }
 
