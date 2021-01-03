@@ -3,10 +3,8 @@ import React, { useState } from "react";
 import Image from "next/image"
 import absoluteUrl from "next-absolute-url/index";
 import { GetStaticProps, NextPage } from "next";
-import { Podcast as PodcastType } from "../types/models";
 import { getContrastColor } from "../utils/contrast-color";
-import initFirebase from "../utils/firebase-admin";
-import { firestore } from "firebase-admin";
+import getPodcast from "../utils/db/podcast";
 
 interface Props {
   title: string
@@ -32,7 +30,7 @@ const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt, backgrou
       <Image className={ "rounded-3xl" } src={ logo } alt={ logoAlt } width={ 200 } height={ 200 }/>
       <h1 className={ "text-3xl sm:text-5xl text-center" }>{ title }</h1>
       <span>{ description }</span>
-      <div className={ "grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pt-6" }>
+      <div className={ "grid gap-2 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pt-6" }>
         <a
           href={ "https://podcasts.google.com/feed/aHR0cHM6Ly9sYW1tZ2VwbGF1ZGVyLmRlL2FwaS9mZWVk?sa=X&ved=0CAMQ4aUDahcKEwig-KGuncbtAhUAAAAAHQAAAAAQAQ&hl=de" }>
           <Image src={ "/google-podcast-badge.svg" } alt={ "Bei Google Podcast anhören" } width={ 200 } height={ 50 }/>
@@ -76,9 +74,7 @@ const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt, backgrou
 
 
 export const getStaticProps: GetStaticProps = async () => {
-  initFirebase()
-  const db = firestore()
-  const podcast = (await db.collection("podcast").doc("Lammgeplauder").get()).data() as PodcastType
+  const podcast = await getPodcast()
 
   return {
     props: {

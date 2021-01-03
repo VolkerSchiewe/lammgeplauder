@@ -1,5 +1,6 @@
 import React, { CSSProperties, ReactNode } from 'react'
 import Head from 'next/head'
+import Link from "next/link"
 
 type Props = {
   children?: ReactNode
@@ -22,6 +23,10 @@ const Layout = ({ children, title = 'Lammgeplauder Podcast', className, style }:
     <div className={ className } style={ style }>
       { children }
     </div>
+    <footer className={ "bg-black text-white flex justify-end px-2 py-1 space-x-3 w-full" }>
+      <Link href={ "/admin" }>{ "Admin" }</Link>
+      <a href={ "https://jugend.ebu.de/impressum-datenschutz" }>{ "Impressum" }</a>
+    </footer>
   </div>
 )
 

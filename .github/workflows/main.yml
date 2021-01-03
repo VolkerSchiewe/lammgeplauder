@@ -27,4 +27,8 @@ jobs:
           start: yarn start
           wait-on: http://localhost:3000
         env:
-          DATOCMS_API_TOKEN: ${{ secrets.DATOCMS_API_TOKEN }}
+          NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
+          NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY }}
+          FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+          FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
+          FIREBASE_PODCAST_DOCUMENT: ${{ secrets.FIREBASE_PODCAST_DOCUMENT }}
