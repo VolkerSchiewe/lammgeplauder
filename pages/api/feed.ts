@@ -13,17 +13,19 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
     feedUrl: `${ origin }/api/feed`,
     description: podcast.description,
     siteUrl: origin,
-    author: "EBU-Jugend",
+    author: "EBU Jugend",
     language: "de-DE",
     imageUrl: podcast.logoUrl,
     itunesCategory: [{ text: "Religion & Spirituality", subcats: [{ text: "Christianity" }] }],
     itunesOwner: {
-      name: "EBU-Jugend",
+      name: "EBU Jugend",
       email: "info@lammgeplauder.de"
     }
   });
 
   for (const episode of episodes) {
+    if (!episode.published)
+      continue
     const hash = episode.audio.md5Hash.slice(0, 10)
     const guid = `${ episode.name.toLowerCase().replace(" ", "-") }-${ hash }`
     feed.addItem({

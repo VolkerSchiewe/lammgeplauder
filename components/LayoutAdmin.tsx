@@ -13,9 +13,11 @@ const LayoutAdmin = ({ children, className = "", style }: Props) => {
   const { user, logout } = useUser()
   return (
     user ? (
-      <Layout className={ `${ className } min-h-screen` } style={ style }>
+      <Layout className={ `min-h-screen flex flex-col items-center` } style={ style }>
         <Navbar logout={ logout }/>
-        { children }
+        <div className={ `${ className } w-full md:w-1/2` }>
+          { children }
+        </div>
       </Layout>
     ) : (
       <div>{ "Unauthorized" }</div>
