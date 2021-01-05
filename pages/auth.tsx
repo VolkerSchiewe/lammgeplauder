@@ -1,7 +1,8 @@
 import React from "react";
 import initFirebase from "../utils/auth/initFirebase";
 import * as firebaseui from "firebaseui";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth"
 import mapUserData from "../utils/auth/mapUserData";
 import { setUserCookie } from "../utils/auth/userCookies";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
