@@ -26,8 +26,9 @@ const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt, backgrou
 
   return (
     <Layout style={ { backgroundColor: backgroundColor, color: getContrastColor(backgroundColor) } }
-            className={ "flex items-center h-screen flex-col space-y-3 pt-10 md:pt-16" }>
-      <Image className={ "rounded-3xl" } src={ logo } alt={ logoAlt } width={ 200 } height={ 200 }/>
+            className={ "flex items-center min-h-screen flex-col space-y-3 pt-10 md:pt-16" }>
+      <Image className={ "rounded-3xl" } src={ logo } alt={ logoAlt } width={ 200 } height={ 200 }
+             layout={ "intrinsic" }/>
       <h1 className={ "text-3xl sm:text-5xl text-center" }>{ title }</h1>
       <span>{ description }</span>
       <div className={ "grid gap-2 sm:gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pt-6" }>
