@@ -5,6 +5,9 @@ import absoluteUrl from "next-absolute-url/index";
 import { GetStaticProps, NextPage } from "next";
 import { getContrastColor } from "../utils/contrast-color";
 import getPodcast from "../utils/db/podcast";
+import EpisodePlayer from "../components/EpisodePlayer";
+import getEpisodes from "../utils/db/episodes";
+import { Episode } from "../types/models";
 
 interface Props {
   title: string
@@ -12,9 +15,10 @@ interface Props {
   logo: string
   logoAlt: string
   backgroundColor: string
+  episodes: Array<Episode>
 }
 
-const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt, backgroundColor }) => {
+const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt, backgroundColor, episodes }) => {
   const [notificationOpen, openNotification] = useState(false)
 
   async function copyFeedToClipboard() {
@@ -69,6 +73,14 @@ const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt, backgrou
           </div>
         </div>
       </div>
+      <div className={ 'p-8 max-w-3xl' }>
+        <h2 className={ "text-2xl sm:text-3xl mb-2" }>{ 'Episoden' }</h2>
+        { episodes
+          .sort((e1, e2) => e1.publishingDate < e2.publishingDate ? 1 : -1)
+          .map((episode) => (
+            <EpisodePlayer key={ episode.id } className={ 'mt-6 mb-24' } episode={ episode }/>
+          )) }
+      </div>
     </Layout>
   );
 }
@@ -76,14 +88,15 @@ const HomePage: NextPage<Props> = ({ title, description, logo, logoAlt, backgrou
 
 export const getStaticProps: GetStaticProps = async () => {
   const podcast = await getPodcast()
-
+  const episodes = await getEpisodes()
   return {
     props: {
       title: podcast.name,
       description: podcast.description,
       logo: podcast.logoUrl,
       logoAlt: podcast.logoAlt,
-      backgroundColor: podcast.homepageBackgroundColor
+      backgroundColor: podcast.homepageBackgroundColor,
+      episodes: episodes
     },
     revalidate: 3600 // seconds (equals 1 hour)
   }

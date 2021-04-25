@@ -3,6 +3,7 @@ import Podcast from 'podcast';
 import absoluteUrl from "next-absolute-url/index";
 import getEpisodes from "../../utils/db/episodes";
 import getPodcast from "../../utils/db/podcast";
+import { getEpisodeGuid } from "../../utils/getEpisodeUrl";
 
 const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const episodes = await getEpisodes()
@@ -26,8 +27,7 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
   for (const episode of episodes) {
     if (!episode.published)
       continue
-    const hash = episode.audio.md5Hash.slice(0, 10)
-    const guid = `${ episode.name.toLowerCase().replace(" ", "-") }-${ hash }`
+    const guid = getEpisodeGuid(episode.name, episode.audio.md5Hash)
     feed.addItem({
       title: episode.name,
       guid: guid,
