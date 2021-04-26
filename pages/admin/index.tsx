@@ -45,7 +45,8 @@ const EditPodcast: NextPage = () => {
 
   async function onSubmit(data: EditPodcast) {
     try {
-      const logoUrl = await uploadFile(data.logo[0])
+      const logoUrl = data.logo.length ? await uploadFile(data.logo[0]) : podcast?.logoUrl
+
       const res = await fetch("/api/podcast", {
         method: "POST",
         body: JSON.stringify({ ...data, logo: undefined, logoUrl })
@@ -75,8 +76,10 @@ const EditPodcast: NextPage = () => {
         return "Invalid dimensions! Image dimensions should be between 1400 and 3000"
       }
       return true
+    } else if (podcast?.logoUrl) {
+      return true
     }
-    return false
+    return "Image missing"
   }
 
   const file = watch("logo")
