@@ -10,7 +10,7 @@ import notifier from "simple-react-notifications2";
 import "simple-react-notifications2/dist/index.css";
 import uploadFile from "../utils/db/uploadFile";
 import getAudioDuration from "../utils/getAudioDuration";
-import { getShortHash } from "../utils/hash";
+import { getHash } from "../utils/hash";
 import FileField from "./forms/FileField";
 import { FirebaseError } from "@firebase/util";
 
@@ -38,7 +38,7 @@ const EditEpisode: React.FC<Props> = ({ episode, onClose }) => {
   async function uploadAudio(file: File): Promise<{ url: string, duration: number, hash: string }> {
     const audioUrl = await uploadFile(file, setUploadState)
     const duration = await getAudioDuration(file)
-    return { url: audioUrl, duration, hash: await getShortHash("md5", file) }
+    return { url: audioUrl, duration, hash: await getHash("md5", file) }
   }
 
   async function onSubmit(data: EditEpisode) {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Episode } from "../types/models";
-import { getEpisodeGuid } from "../utils/getEpisodeUrl";
+import { getEpisodeGuid } from "../utils/getEpisodeGuid";
 
 interface Props {
   episode: Episode

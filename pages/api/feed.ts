@@ -3,7 +3,7 @@ import Podcast from 'podcast';
 import absoluteUrl from "next-absolute-url/index";
 import getEpisodes from "../../utils/db/episodes";
 import getPodcast from "../../utils/db/podcast";
-import { getEpisodeGuid } from "../../utils/getEpisodeUrl";
+import { getEpisodeGuid } from "../../utils/getEpisodeGuid";
 
 const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
   const episodes = await getEpisodes()
