@@ -49,5 +49,8 @@
       "<rootDir>/node_modules/",
       "<rootDir>/cypress/"
     ]
+  },
+  "engines": {
+    "node": "14"
   }
 }
