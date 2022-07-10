@@ -1,0 +1,67 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:psc="http://podlove.org/simple-chapters" xmlns:podcast="https://podcastindex.org/namespace/1.0" version="2.0">
+<channel>
+<title>
+<![CDATA[ Lammgeplauder ]]>
+</title>
+<description>
+<![CDATA[ Ein Podcast der EBU ]]>
+</description>
+<link>http://localhost:3000</link>
+<generator>Podcast for Node</generator>
+<lastBuildDate>Sun, 10 Jul 2022 20:21:21 GMT</lastBuildDate>
+<atom:link href="http://localhost:3000/api/feed" rel="self" type="application/rss+xml"/>
+<author>
+<![CDATA[ EBU Jugend ]]>
+</author>
+<language>
+<![CDATA[ de-DE ]]>
+</language>
+<itunes:author>EBU Jugend</itunes:author>
+<itunes:summary>Ein Podcast der EBU</itunes:summary>
+<itunes:owner>
+<itunes:name>EBU Jugend</itunes:name>
+<itunes:email>info@lammgeplauder.de</itunes:email>
+</itunes:owner>
+<itunes:explicit>false</itunes:explicit>
+<itunes:category text="Religion & Spirituality">
+<itunes:category text="Christianity"/>
+</itunes:category>
+<itunes:image href="https://firebasestorage.googleapis.com/v0/b/lammgeplauder-b1d93.appspot.com/o/logofinalweb-jpeg.jpeg?alt=media&token=0da0c225-2d3e-41fc-b0ef-8a16ff96f8af"/>
+<item>
+<title>
+<![CDATA[ Episode 3 ]]>
+</title>
+<description>
+<![CDATA[ Beschreibung 2, Ewig langer text der sich immer wieder wiederholt. Ewig langer text der sich immer wieder wiederholt. Ewig langer text der sich immer wieder wiederholt. Ewig langer text der sich immer wieder wiederholt. Ewig langer text der sich immer wieder wiederholt. Ewig langer text der sich immer wieder wiederholt ]]>
+</description>
+<link>http://localhost:3000#episode-3-aee19a</link>
+<guid isPermaLink="false">episode-3-aee19a</guid>
+<dc:creator>
+<![CDATA[ EBU Jugend ]]>
+</dc:creator>
+<pubDate>Thu, 31 Dec 2020 00:00:00 GMT</pubDate>
+<enclosure url="https://firebasestorage.googleapis.com/v0/b/lammgeplauder-b1d93.appspot.com/o/Weihnachtsfolge-interview.mp3?alt=media&token=9fd9679c-792b-47de-84bb-8f239f4c20a1" length="32080487" type="audio/mpeg"/>
+<itunes:summary>Beschreibung 2, Ewig langer text der sich immer wieder wiederholt. Ewig langer text der sich immer wieder wiederholt. Ewig langer text der sich immer wieder wiederholt. Ewig langer text der sich immer wieder wiederholt. Ewig langer text der sich immer wieder wiederholt. Ewig langer text der sich immer wieder wiederholt</itunes:summary>
+<itunes:explicit>false</itunes:explicit>
+<itunes:duration>00:43:28</itunes:duration>
+</item>
+<item>
+<title>
+<![CDATA[ Episode 1 ]]>
+</title>
+<description>
+<![CDATA[ Beschreibung ]]>
+</description>
+<link>http://localhost:3000#episode-1-aee19a</link>
+<guid isPermaLink="false">episode-1-aee19a</guid>
+<dc:creator>
+<![CDATA[ EBU Jugend ]]>
+</dc:creator>
+<pubDate>Thu, 31 Dec 2020 00:00:00 GMT</pubDate>
+<enclosure url="https://firebasestorage.googleapis.com/v0/b/lammgeplauder-b1d93.appspot.com/o/Weihnachtsfolge-interview.mp3?alt=media&token=44f19cec-830a-4810-b24c-bc63e00add8f" length="32080487" type="audio/mpeg"/>
+<itunes:summary>Beschreibung</itunes:summary>
+<itunes:explicit>false</itunes:explicit>
+<itunes:duration>00:43:28</itunes:duration>
+</item>
+</channel>
+</rss>
