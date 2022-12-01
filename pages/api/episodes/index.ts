@@ -7,13 +7,13 @@ import { firestore } from "firebase-admin";
 const episodes = async (req: NextApiRequest, res: NextApiResponse) => {
   initFirebaseAdmin()
   if (req.method === "POST") {
-    console.log("new episode", req.body)
+    console.info("new episode", req.body)
     const data = JSON.parse(req.body)
     await firestore().collection(process.env.FIREBASE_PODCAST_DOCUMENT as string).add(data)
     res.end()
     return
   } else if (req.method === "GET") {
-    console.log("get all episodes")
+    console.info("get all episodes")
     const episodes = await getEpisodes()
     res.send(episodes)
     return

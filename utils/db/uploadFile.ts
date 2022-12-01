@@ -1,24 +1,29 @@
-import firebase from "firebase/app";
-import "firebase/storage"
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import initFirebase from "../auth/initFirebase";
 
-initFirebase()
+initFirebase();
 
-export default function uploadFile(file: File, progressHandler?: (progress: number) => void): Promise<string> {
+export default function uploadFile(
+  file: File,
+  progressHandler?: (progress: number) => void
+): Promise<string> {
   return new Promise(async (resolve, reject) => {
-    const fileBuffer = await file.arrayBuffer()
-    const bucket = firebase.storage().ref()
-    const uploadTask = bucket.child(file.name)
-      .put(fileBuffer, { contentType: file.type })
-    uploadTask.on("state_changed", snapshot => {
+    const fileBuffer = await file.arrayBuffer();
+    const bucket = ref(getStorage());
+    const uploadTask = uploadBytesResumable(ref(bucket, file.name), fileBuffer, {contentType: file.type,})
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
         if (progressHandler) {
-          progressHandler((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+          progressHandler(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
         }
       },
-      error => reject(error),
+      (error) => reject(error),
       () => {
-        uploadTask.snapshot.ref.getDownloadURL()
-          .then(url => resolve(url))
-      })
-  })
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => resolve(url));
+      }
+    );
+  });
 }
