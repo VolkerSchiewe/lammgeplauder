@@ -5,7 +5,7 @@ describe('RSS Feed', () => {
       .its('body')
       .then(xml => {
         expect(xml).to.contain("Lammgeplauder")
-        expect(xml).to.contain("<image>")
+        expect(xml).to.contain("<itunes:image")
         expect(xml).to.contain("<item>")
       })
   });
