@@ -1,4 +1,4 @@
-import firebase from "firebase/app";
+import { User } from "firebase/auth"
 
 export interface UserData {
   id: string
@@ -6,7 +6,7 @@ export interface UserData {
   token: string
 }
 
-export default async function mapUserData(user: firebase.User): Promise<UserData> {
+export default async function mapUserData(user: User): Promise<UserData> {
   const { uid, email } = user
   const token = await user.getIdToken(true)
   return {

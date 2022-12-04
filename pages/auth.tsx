@@ -1,11 +1,10 @@
-import React from "react";
-import initFirebase from "../utils/auth/initFirebase";
+import "firebase/auth";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import * as firebaseui from "firebaseui";
-import firebase from "firebase/app";
-import "firebase/auth"
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import initFirebase from "../utils/auth/initFirebase";
 import mapUserData from "../utils/auth/mapUserData";
 import { setUserCookie } from "../utils/auth/userCookies";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
 initFirebase()
 
@@ -13,7 +12,7 @@ const firebaseAuthConfig: firebaseui.auth.Config = {
   signInFlow: 'redirect',
   signInOptions: [
     {
-      provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      provider: GoogleAuthProvider.PROVIDER_ID,
       requireDisplayName: false,
     },
   ],
@@ -30,7 +29,7 @@ const Auth = () => {
   return (
     <StyledFirebaseAuth
       uiConfig={ firebaseAuthConfig }
-      firebaseAuth={ firebase.auth() }
+      firebaseAuth={ getAuth() }
     />
   )
 }

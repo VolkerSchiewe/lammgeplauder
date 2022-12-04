@@ -14,9 +14,8 @@ const protectedApi = (handler: NextApiHandler) => (req: NextApiRequest, res: Nex
 
 export function isValidSession(req: NextApiRequest | IncomingMessage): boolean {
   const user = new Cookies(req.headers.cookie).get("auth")
-  console.log({ user })
   if (!["O75uFNTQAGOU5rz7jPISqmcshsF3", "UgnO5DATTSSgMX3p28CSsRl1tYn1"].includes(user?.id)) {
-    console.log("Unauthorized", req.url, user)
+    console.info("Unauthorized", req.url, user)
     return false
   }
   return true

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import  Podcast from "podcast";
 import absoluteUrl from "next-absolute-url/index";
+import {Podcast} from "podcast";
 import getEpisodes from "../../utils/db/episodes";
 import getPodcast from "../../utils/db/podcast";
 import { getEpisodeGuid } from "../../utils/getEpisodeGuid";
@@ -34,7 +34,7 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
       guid: guid,
       enclosure: {
         url: episode.audio.url,
-        size: episode.audio.size.toString(),
+        size: episode.audio.size,
         type: episode.audio.mimeType,
       },
       date: episode.publishingDate,
@@ -46,6 +46,6 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
 
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/xml");
-  res.end(feed.buildXml(" "));
+  res.end(feed.buildXml({indent:" "}));
 };
 export default feedApi;

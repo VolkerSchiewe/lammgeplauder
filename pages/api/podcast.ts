@@ -8,7 +8,7 @@ import protectedApi from "../../utils/auth/protectedApi";
 const setPodcast = async (req: NextApiRequest, res: NextApiResponse) => {
   initFirebaseAdmin()
   if (req.method === "POST") {
-    console.log("set podcast")
+    console.info("set podcast")
     const data = JSON.parse(req.body)
     const errors = validateData(data)
     if (errors.length > 0) {
@@ -21,7 +21,7 @@ const setPodcast = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(200).end()
     return
   } else if (req.method === "GET") {
-    console.log("get podcast")
+    console.info("get podcast")
     const podcast = await getPodcast()
     res.json(podcast)
     return

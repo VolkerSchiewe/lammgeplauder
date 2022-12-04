@@ -4,7 +4,7 @@ import { initFirebaseAdmin } from "../../../utils/auth/firebaseAdmin";
 import protectedApi from "../../../utils/auth/protectedApi";
 
 const setEpisode = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log("set episode")
+  console.info("set episode")
   initFirebaseAdmin()
   const { query: { id }, } = req
   if (req.method === "POST") {

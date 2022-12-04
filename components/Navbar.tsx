@@ -54,7 +54,7 @@ const Navbar: React.FC<Props> = ({ logout }) => {
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="hidden sm:block">
               <div className="flex items-center space-x-4">
-                <Link href={ "/" }>
+                <Link href={ "/" } legacyBehavior>
                   <svg className="cursor-pointer text-gray-400 w-6 h-6" fill="none" stroke="currentColor"
                        viewBox="0 0 24 24"
                        xmlns="http://www.w3.org/2000/svg">
@@ -65,8 +65,8 @@ const Navbar: React.FC<Props> = ({ logout }) => {
                 { menuItems.map(({ href, label }) => {
                   const classes = router.pathname === href ? "bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" : "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   return (
-                    <Link key={ href } href={ href }>
-                      <a className={ classes }>{ label }</a>
+                    <Link key={ href } href={ href } className={ classes }>
+                      { label }
                     </Link>
                   );
                 }) }
@@ -92,15 +92,15 @@ const Navbar: React.FC<Props> = ({ logout }) => {
           { menuItems.map(({ href, label }) => {
             const classes = router.pathname === href ? "bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" : "text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
             return (
-              <Link key={ href } href={ href }>
-                <a className={ classes }>{ label }</a>
+              <Link key={ href } href={ href } className={ classes }>
+                { label }
               </Link>
             );
           }) }
         </div>
       </div>
     </nav>
-  )
+  );
 }
 
 export default Navbar
