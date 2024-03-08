@@ -23,6 +23,7 @@
     "incremental": true
   },
   "exclude": [
+    "./cypress.config.ts",
     "node_modules",
     "cypress"
   ],

@@ -20,6 +20,12 @@ jobs:
       - name: Run unit tests
         run: yarn test
 
+      - name: Run lister
+        run: yarn lint
+      
+      - name: Run Type checker
+        run: yarn type-check
+
       - name: Cypress Tests
         uses: cypress-io/github-action@v5
         with:
