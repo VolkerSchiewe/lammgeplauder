@@ -54,6 +54,7 @@ const HomePage: NextPage<Props> = ({
         alt={logoAlt}
         width={200}
         height={200}
+        priority={true}
       />
       <h1 className={"text-3xl sm:text-5xl text-center"}>{title}</h1>
       <span>{description}</span>
@@ -174,7 +175,7 @@ export const getStaticProps: GetStaticProps = async () => {
       logo: podcast.logoUrl,
       logoAlt: podcast.logoAlt,
       backgroundColor: podcast.homepageBackgroundColor,
-      episodes: episodes,
+      episodes: episodes.filter(e => e.published),
     },
     revalidate: 3600, // seconds (equals 1 hour)
   };

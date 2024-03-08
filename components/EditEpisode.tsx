@@ -6,13 +6,12 @@ import ModalBody from "./modal/ModalBody";
 import ModalActions from "./modal/ModalActions";
 import Button from "./Button";
 import CheckboxField from "./forms/CheckboxField";
-import notifier from "simple-react-notifications2";
-import "simple-react-notifications2/dist/index.css";
 import uploadFile from "../utils/db/uploadFile";
 import getAudioDuration from "../utils/getAudioDuration";
 import { getHash } from "../utils/hash";
 import FileField from "./forms/FileField";
 import { FirebaseError } from "@firebase/util";
+import { toast } from "react-toastify";
 
 interface Props {
   episode?: Episode;
@@ -69,13 +68,13 @@ const EditEpisode: React.FC<Props> = ({ episode, onClose }) => {
         }),
       });
       if (res.ok)
-        notifier.success(
+        toast.success(
           isNewEpisode ? "Episode erstellt" : "Episode geändert"
         );
-      else notifier.error("Fehler");
+      else toast.error("Fehler");
       onClose();
     } catch (e) {
-      if (e instanceof FirebaseError) notifier.error("Unauthorized");
+      if (e instanceof FirebaseError) toast.error("Unauthorized");
       else throw e;
     } finally {
       isLoading(false);

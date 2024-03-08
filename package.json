@@ -2,7 +2,7 @@
   "name": "lammgeplauder",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc",
@@ -21,7 +21,7 @@
     "react-dom": "^18.2.0",
     "react-firebaseui": "^6.0.0",
     "react-hook-form": "^7.0.0",
-    "simple-react-notifications2": "^2.0.0",
+    "react-toastify": "^10.0.4",
     "universal-cookie": "^7.0.0"
   },
   "devDependencies": {
