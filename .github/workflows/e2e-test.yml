@@ -1,0 +1,19 @@
+name: e2e Tests
+
+on:
+  deployment_status:
+jobs:
+  run-e2es:
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run tests
+        uses: cypress-io/github-action@v5
+        with:
+            config: baseUrl=${{ github.event.deployment_status.environment_url }}
