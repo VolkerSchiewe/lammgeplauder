@@ -6,14 +6,13 @@ import TextField from "../../components/forms/TextField";
 import { Podcast } from "../../types/models";
 import { useForm } from "react-hook-form";
 import { getContrastColor } from "../../utils/contrast-color";
-import notifier from "simple-react-notifications2";
-import "simple-react-notifications2/dist/index.css";
 import { ValidationError } from "../../utils/db/validation";
 import FileField from "../../components/forms/FileField";
 import getImageDimensions from "../../utils/getImageDimensions";
 import uploadFile from "../../utils/db/uploadFile";
 import { FirebaseError } from "@firebase/util";
 import Image from "next/image"
+import { toast } from "react-toastify";
 
 interface EditPodcast extends Omit<Podcast, "logoUrl"> {
   logo: FileList;
@@ -40,7 +39,7 @@ const EditPodcast: NextPage = () => {
     setPodcast(data);
   })
   .catch((e) => {
-    notifier.error(e.message);
+    toast.error(e.message);
   }), [reset])
 
   useEffect(() => {
@@ -59,9 +58,9 @@ const EditPodcast: NextPage = () => {
       });
       if (res.status === 200) {
         fetchPodcast();
-        notifier.success("Podcast geändert");
+        toast.success("Podcast geändert");
       } else {
-        notifier.error("Fehler");
+        toast.error("Fehler");
         const errors = await res.json();
         errors.forEach((error: ValidationError) =>
           setError(error.field as any, {
@@ -71,7 +70,7 @@ const EditPodcast: NextPage = () => {
         );
       }
     } catch (e) {
-      if (e instanceof FirebaseError) notifier.error("Unauthorized");
+      if (e instanceof FirebaseError) toast.error("Unauthorized");
       else throw e;
     }
   }

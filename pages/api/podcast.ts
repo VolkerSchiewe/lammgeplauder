@@ -24,6 +24,7 @@ const setPodcast = async (req: NextApiRequest, res: NextApiResponse) => {
     console.info("get podcast")
     const podcast = await getPodcast()
     res.json(podcast)
+    res.end()
     return
   } else {
     res.status(405).end()
