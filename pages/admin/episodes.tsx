@@ -6,7 +6,7 @@ import Modal from "../../components/modal/Modal";
 import EditEpisode from "../../components/EditEpisode";
 import { Episode } from "../../types/models";
 import formatBytes from "../../utils/formatBytes";
-import notifier from "simple-react-notifications2";
+import { toast } from "react-toastify";
 
 
 const EpisodesPage: NextPage = () => {
@@ -27,7 +27,7 @@ const EpisodesPage: NextPage = () => {
       })
       .then(data => setEpisodes(data))
       .catch(e => {
-        notifier.error(e.message)
+        toast.error(e.message)
       })
   }
 

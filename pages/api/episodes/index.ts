@@ -10,6 +10,7 @@ const episodes = async (req: NextApiRequest, res: NextApiResponse) => {
     console.info("new episode", req.body)
     const data = JSON.parse(req.body)
     await firestore().collection(process.env.FIREBASE_PODCAST_DOCUMENT as string).add(data)
+    res.send("Saved")
     res.end()
     return
   } else if (req.method === "GET") {

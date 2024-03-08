@@ -12,6 +12,7 @@ const setEpisode = async (req: NextApiRequest, res: NextApiResponse) => {
     const oldData = (await firestore().collection(process.env.FIREBASE_PODCAST_DOCUMENT as string).doc(id as string).get()).data()
     const updatedData = { ...oldData, ...data }
     await firestore().collection(process.env.FIREBASE_PODCAST_DOCUMENT as string).doc(id as string).set(updatedData)
+    res.send("Saved")
     res.end()
   } else {
     res.send("Not implemented")
