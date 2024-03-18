@@ -16,7 +16,7 @@
     "next": "^14.0.0",
     "next-absolute-url": "^1.2.2",
     "podcast": "^2.0.0",
-    "postcss": "^8.1.14",
+    "postcss": "^8.4.36",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-firebaseui": "^6.0.0",
