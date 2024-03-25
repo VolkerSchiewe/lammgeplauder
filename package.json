@@ -21,7 +21,7 @@
     "react-dom": "^18.2.0",
     "react-firebaseui": "^6.0.0",
     "react-hook-form": "^7.0.0",
-    "react-toastify": "^10.0.4",
+    "react-toastify": "^10.0.5",
     "universal-cookie": "^7.0.0"
   },
   "devDependencies": {
