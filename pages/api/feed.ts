@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import absoluteUrl from "next-absolute-url/index";
 import {Podcast} from "podcast";
-import getEpisodes from "../../utils/db/episodes";
-import getPodcast from "../../utils/db/podcast";
+import getEpisodes from "../../libs/db/episodes";
+import getPodcast from "../../libs/db/podcast";
 import { getEpisodeGuid } from "../../utils/getEpisodeGuid";
 
 const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {

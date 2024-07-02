@@ -1,9 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { firestore } from "firebase-admin";
-import { validateData } from "../../utils/db/validation";
-import getPodcast from "../../utils/db/podcast";
-import { initFirebaseAdmin } from "../../utils/auth/firebaseAdmin";
-import protectedApi from "../../utils/auth/protectedApi";
+import { validateData } from "../../libs/db/validation";
+import getPodcast from "../../libs/db/podcast";
+import { initFirebaseAdmin } from "../../libs/firebase/firebaseAdmin";
 
 const setPodcast = async (req: NextApiRequest, res: NextApiResponse) => {
   initFirebaseAdmin()
@@ -32,4 +31,4 @@ const setPodcast = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default protectedApi(setPodcast)
+export default setPodcast

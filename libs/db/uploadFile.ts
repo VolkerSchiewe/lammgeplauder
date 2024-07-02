@@ -1,7 +1,7 @@
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
-import initFirebase from "../auth/initFirebase";
+import { firebaseApp } from "../firebase/config";
 
-initFirebase();
+firebaseApp
 
 export default function uploadFile(
   file: File,

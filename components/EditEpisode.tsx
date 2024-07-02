@@ -6,7 +6,7 @@ import ModalBody from "./modal/ModalBody";
 import ModalActions from "./modal/ModalActions";
 import Button from "./Button";
 import CheckboxField from "./forms/CheckboxField";
-import uploadFile from "../utils/db/uploadFile";
+import uploadFile from "../libs/db/uploadFile";
 import getAudioDuration from "../utils/getAudioDuration";
 import { getHash } from "../utils/hash";
 import FileField from "./forms/FileField";
