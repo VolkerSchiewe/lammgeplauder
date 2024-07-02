@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from "react";
 import { Episode } from "../types/models";
 import { getEpisodeGuid } from "../utils/getEpisodeGuid";

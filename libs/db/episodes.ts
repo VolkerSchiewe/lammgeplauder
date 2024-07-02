@@ -1,6 +1,6 @@
 import { Episode } from "../../types/models";
 import { firestore } from "firebase-admin";
-import { initFirebaseAdmin } from "../auth/firebaseAdmin";
+import { initFirebaseAdmin } from "../firebase/firebaseAdmin";
 
 export default function getEpisodes(): Promise<Array<Episode>> {
   initFirebaseAdmin()

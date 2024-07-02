@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import getEpisodes from "../../../utils/db/episodes";
-import { initFirebaseAdmin } from "../../../utils/auth/firebaseAdmin";
-import protectedApi from "../../../utils/auth/protectedApi";
+import getEpisodes from "../../../libs/db/episodes";
+import { initFirebaseAdmin } from "../../../libs/firebase/firebaseAdmin";
 import { firestore } from "firebase-admin";
 
 const episodes = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -23,4 +22,4 @@ const episodes = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default protectedApi(episodes)
+export default episodes

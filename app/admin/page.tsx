@@ -1,25 +1,24 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { NextPage } from "next";
-import LayoutAdmin from "../../components/LayoutAdmin";
+'use client'
+
+import { useCallback, useEffect, useState } from "react";
+import FileField from "../../components/forms/FileField";
 import TexField from "../../components/forms/TextField";
-import TextField from "../../components/forms/TextField";
 import { Podcast } from "../../types/models";
 import { useForm } from "react-hook-form";
-import { getContrastColor } from "../../utils/contrast-color";
-import { ValidationError } from "../../utils/db/validation";
-import FileField from "../../components/forms/FileField";
-import getImageDimensions from "../../utils/getImageDimensions";
-import uploadFile from "../../utils/db/uploadFile";
-import { FirebaseError } from "@firebase/util";
-import Image from "next/image"
 import { toast } from "react-toastify";
+import uploadFile from "../../libs/db/uploadFile";
+import { ValidationError } from "../../libs/db/validation";
+import { FirebaseError } from "firebase/app";
+import getImageDimensions from "../../utils/getImageDimensions";
+import Image from "next/image"
+import TextField from "../../components/forms/TextField";
+import { getContrastColor } from "../../utils/contrast-color";
 
 interface EditPodcast extends Omit<Podcast, "logoUrl"> {
-  logo: FileList;
-}
-
-const EditPodcast: NextPage = () => {
-  const [podcast, setPodcast] = useState<Podcast | null>(null);
+    logo: FileList;
+  }
+export default function AdminPage(){
+    const [podcast, setPodcast] = useState<Podcast | null>(null);
   const {
     register,
     handleSubmit,
@@ -29,7 +28,7 @@ const EditPodcast: NextPage = () => {
     control,
     reset,
   } = useForm<EditPodcast>();
-  const fetchPodcast = useCallback(()=>  fetch("/api/podcast", { method: "GET" })
+  const fetchPodcast = useCallback(()=> fetch("/api/podcast", { method: "GET" })
   .then((res) => {
     if (res.ok) return res.json();
     else throw Error("Unauthorized");
@@ -81,7 +80,7 @@ const EditPodcast: NextPage = () => {
     if (fileList && fileList.length > 0) {
       const { width, height } = await getImageDimensions(fileList[0]);
       if (width > 3000 || width < 1400 || height > 3000 || height < 1400) {
-        return "Invalid dimensions! Image dimensions should be between 1400 and 3000";
+        return "Invalid dimensions! Image dimensions should be between 1400px and 3000px";
       }
       return true;
     } else if (podcast?.logoUrl) {
@@ -95,9 +94,8 @@ const EditPodcast: NextPage = () => {
   const previewUrl =
     file?.length > 0 ? URL.createObjectURL(file[0]) : podcast?.logoUrl;
   const color = watch("homepageBackgroundColor");
-  return (
-    <LayoutAdmin className={"flex flex-col"}>
-      {podcast && (
+    return <>
+    {podcast && (
         <form
           className={"p-5 flex flex-col flex-grow"}
           onSubmit={handleSubmit(onSubmit)}
@@ -171,8 +169,5 @@ const EditPodcast: NextPage = () => {
           </button>
         </form>
       )}
-    </LayoutAdmin>
-  );
-};
-
-export default EditPodcast;
+      </>
+}
