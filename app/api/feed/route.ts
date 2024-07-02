@@ -1,19 +1,19 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import absoluteUrl from "next-absolute-url/index";
-import {Podcast} from "podcast";
-import getEpisodes from "../../libs/db/episodes";
-import getPodcast from "../../libs/db/podcast";
-import { getEpisodeGuid } from "../../utils/getEpisodeGuid";
+import { Podcast } from "podcast";
+import getEpisodes from "../../../libs/db/episodes";
+import getPodcast from "../../../libs/db/podcast";
+import { getEpisodeGuid } from "../../../utils/getEpisodeGuid";
+import { NextRequest } from "next/server";
 
-const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
+export const GET = async (request: NextRequest) => {
+  const url = new URL(request.url);
+
   const episodes = await getEpisodes();
   const podcast = await getPodcast();
-  const { origin } = absoluteUrl(req);
   const feed = new Podcast({
     title: podcast.name,
-    feedUrl: `${origin}/api/feed`,
+    feedUrl: url.href,
     description: podcast.description,
-    siteUrl: origin,
+    siteUrl: url.origin,
     author: "EBU Jugend",
     language: "de-DE",
     imageUrl: podcast.logoUrl,
@@ -40,12 +40,13 @@ const feedApi = async (req: NextApiRequest, res: NextApiResponse) => {
       date: episode.publishingDate,
       description: episode.description,
       itunesDuration: episode.audio.duration,
-      url: `${origin}#${guid}`,
+      url: `${url.href}#${guid}`,
     });
   }
-
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "application/xml");
-  res.end(feed.buildXml({indent:" "}));
+  return new Response(feed.buildXml({ indent: " " }), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/xml",
+    },
+  });
 };
-export default feedApi;

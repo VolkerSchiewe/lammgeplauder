@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import TextField from "./forms/TextField";
+import TextField from "../../../components/forms/TextField";
 import { useForm } from "react-hook-form";
-import { Episode } from "../types/models";
+import { Episode } from "../../../types/models";
 import ModalBody from "./modal/ModalBody";
 import ModalActions from "./modal/ModalActions";
-import Button from "./Button";
-import CheckboxField from "./forms/CheckboxField";
-import uploadFile from "../libs/db/uploadFile";
-import getAudioDuration from "../utils/getAudioDuration";
-import { getHash } from "../utils/hash";
-import FileField from "./forms/FileField";
+import Button from "../../../components/Button";
+import CheckboxField from "../../../components/forms/CheckboxField";
+import uploadFile from "../../../libs/db/uploadFile";
+import getAudioDuration from "../../../utils/getAudioDuration";
+import { getHash } from "../../../utils/hash";
+import FileField from "../../../components/forms/FileField";
 import { FirebaseError } from "@firebase/util";
 import { toast } from "react-toastify";
 

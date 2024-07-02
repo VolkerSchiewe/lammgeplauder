@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import "../styles/tailwind.css";
 
 import { SESSION_COOKIE_NAME } from "../constants";
-import Footer from "../components/Footer";
+import Footer from "./Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

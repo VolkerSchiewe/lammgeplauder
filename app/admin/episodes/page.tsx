@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import { Episode } from "../../../types/models";
 import { toast } from "react-toastify";
-import Modal from "../../../components/modal/Modal";
-import EditEpisode from "../../../components/EditEpisode";
+import Modal from "./modal/Modal";
+import EditEpisode from "./EditEpisode";
 import formatBytes from "../../../utils/formatBytes";
 import formatDuration from "../../../utils/formatDuration";
 

@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { signOutWithGoogle } from "../libs/firebase/auth";
-import { removeSessionCookie } from "../actions/auth-actions";
+import { signOutWithGoogle } from "../../libs/firebase/auth";
+import { removeSessionCookie } from "../../actions/auth-actions";
 
 const menuItems = [
   { label: "Podcast & Website", href: "/admin" },

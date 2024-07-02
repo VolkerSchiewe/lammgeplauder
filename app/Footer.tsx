@@ -10,8 +10,7 @@ export function Footer({ session }: { session: string | null }) {
   const userSessionId = useUserSession(session);
 
   const handleSignIn = async () => {
-    const {uid,email, token} = await signInWithGoogle();
-    console.log(uid, token);
+    const {email, token} = await signInWithGoogle();
     
     if (email && await validateUser(email)) {
       await createSessionCookie(token);

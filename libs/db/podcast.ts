@@ -1,3 +1,5 @@
+'use server'
+
 import { Podcast } from "../../types/models";
 import { firestore } from "firebase-admin";
 import { initFirebaseAdmin } from "../firebase/firebaseAdmin";

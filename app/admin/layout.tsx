@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import Navbar from "../../components/Navbar";
+import Navbar from "./Navbar";
 
 export default function AdminLayout({
   children,

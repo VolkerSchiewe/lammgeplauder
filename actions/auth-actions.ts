@@ -9,6 +9,7 @@ import getUsers from '../libs/db/users';
 export async function validateUser(email: string): Promise<boolean> {
   return (await getUsers()).includes(email)
 }
+
 export async function createSessionCookie(token: string) {
   cookies().set(SESSION_COOKIE_NAME, token, {
     httpOnly: true,

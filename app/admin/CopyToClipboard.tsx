@@ -1,14 +1,14 @@
 "use client";
-import absoluteUrl from "next-absolute-url";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function CopyToClipboard() {
   const [copyDone, setCopyDone] = useState(false);
 
   async function copyFeedToClipboard() {
-    const { origin } = absoluteUrl();
-    await navigator.clipboard.writeText(`${origin}/api/feed`);
+    await navigator.clipboard.writeText(`${window.location.host}/api/feed`);
     setCopyDone(true);
+    toast.success("Feed URL kopiert", { autoClose: 2000 });
     setTimeout(() => setCopyDone(false), 2000);
   }
   return (

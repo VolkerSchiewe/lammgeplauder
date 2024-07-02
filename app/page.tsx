@@ -1,4 +1,4 @@
-import EpisodePlayer from "../components/EpisodePlayer";
+import EpisodePlayer from "./EpisodePlayer";
 import { getContrastColor } from "../utils/contrast-color";
 import Layout from "../components/Layout";
 import Image from "next/image";
@@ -7,7 +7,7 @@ import getEpisodes from "../libs/db/episodes";
 
 import applePodcastBadge from "../public/apple-podcast-badge.svg";
 import spotifyPodcastBadge from "../public/spotify-podcast-badge.svg";
-import CopyToClipboard from "../components/CopyToClipboard";
+import CopyToClipboard from "./admin/CopyToClipboard";
 
 export default async function Home() {
   const podcast = await getPodcast();
