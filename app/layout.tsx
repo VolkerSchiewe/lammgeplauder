@@ -6,7 +6,6 @@ import "../styles/tailwind.css";
 import { SESSION_COOKIE_NAME } from "../constants";
 import Footer from "./Footer";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
