@@ -97,7 +97,7 @@ export default function AdminPage(){
     return <>
     {podcast && (
         <form
-          className={"p-5 flex flex-col flex-grow"}
+          className={"p-5 flex flex-col grow"}
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className={"text-xl"}>{"Podcast"}</div>
@@ -127,7 +127,7 @@ export default function AdminPage(){
                 control={control}
               />
               <Image
-                className={"border rounded"}
+                className={"border rounded-sm"}
                 width={100}
                 height={100}
                 src={previewUrl ?? podcast.logoUrl}
@@ -146,7 +146,7 @@ export default function AdminPage(){
             <TexField
               name="homepageBackgroundColor"
               register={register}
-              className={"flex-grow"}
+              className={"grow"}
               label={"Homepage Hintergrundfarbe"}
               placeholder={"#FFFFFF"}
               errors={errors}
@@ -158,11 +158,11 @@ export default function AdminPage(){
               }
             ></div>
           </div>
-          <div className={"flex-grow"} />
+          <div className={"grow"} />
           <button
             type={"submit"}
             className={
-              "border rounded py-2 px-4 self-end bg-gray-800 text-white mt-5"
+              "border rounded-sm py-2 px-4 self-end bg-gray-800 text-white mt-5"
             }
           >
             {"Speichern"}

@@ -30,7 +30,7 @@ const FileField: React.FC<Props & RegisterOptions> = ({
   const value: FileList | undefined = useWatch({ name, control });
   const fileName = value ? value[0]?.name : "";
   return (
-    <div className={"flex-grow max-w-xs"}>
+    <div className={"grow max-w-xs"}>
       <label
         className={`flex flex-col items-center px-4 py-6 rounded-lg tracking-wide uppercase border ${
           disabled

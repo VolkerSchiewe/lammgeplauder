@@ -23,7 +23,7 @@ const CheckboxField: React.FC<Props & RegisterOptions> = ({
           type="checkbox"
           name={name}
           defaultChecked={defaultChecked}
-          className="rounded bg-gray-200 border-transparent focus:border-transparent focus:bg-gray-200 text-gray-700 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500"
+          className="rounded-sm bg-gray-200 border-transparent focus:border-transparent focus:bg-gray-200 text-gray-700 focus:ring-1 focus:ring-offset-2 focus:ring-gray-500"
         />
         <span className="ml-2">{label}</span>
       </label>

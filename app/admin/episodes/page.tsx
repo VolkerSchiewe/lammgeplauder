@@ -48,7 +48,7 @@ export default function EpisodesPage() {
       <div className={"p-5 space-y-5"}>
         <div>
           <button
-            className={"border rounded py-1 px-3 inline-flex"}
+            className={"border border-gray-200 rounded-sm py-1 px-3 inline-flex"}
             onClick={() => setModalEpisode(undefined)}
           >
             <svg
@@ -74,7 +74,7 @@ export default function EpisodesPage() {
           return (
             <div
               key={name}
-              className={`grid grid-cols-2 gap-3 border rounded shadow-sm p-5 ${
+              className={`grid grid-cols-2 gap-3 border-gray-200 rounded shadow-sm p-5 ${
                 published ? "bg-white" : "bg-gray-100 text-gray-600"
               }`}
             >
@@ -83,7 +83,7 @@ export default function EpisodesPage() {
                   <span className={"text-2xl font-bold"}>{name}</span>
                   {!published && (
                     <span
-                      className={"border-2 border-red-800 rounded px-2 py-1"}
+                      className={"border-2 border-red-800 rounded-sm px-2 py-1"}
                     >
                       {"Unveröffentlicht"}
                     </span>
@@ -101,7 +101,7 @@ export default function EpisodesPage() {
               </div>
               <div className={"col-start-2 flex justify-end space-x-3"}>
                 <button
-                  className={"border rounded py-1 px-3"}
+                  className={"border border-gray-200 rounded-sm py-1 px-3"}
                   onClick={() => setModalEpisode(episode)}
                 >
                   {"Bearbeiten"}
