@@ -68,7 +68,6 @@ export default async function Home() {
       <div className={"p-8 max-w-3xl"}>
         <h2 className={"text-2xl sm:text-3xl mb-2"}>{"Episoden"}</h2>
         {episodes
-          .sort((e1, e2) => (e1.publishingDate > e2.publishingDate ? 1 : -1))
           .map((episode) => (
             <EpisodePlayer
               key={episode.id}
