@@ -3,10 +3,8 @@ import { initFirebaseAdmin } from "../../../../libs/firebase/firebaseAdmin";
 
 initFirebaseAdmin();
 
-export async function POST(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function POST(request: Request, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   console.info("set episode");
   const data = await request.json();
   const oldData = (

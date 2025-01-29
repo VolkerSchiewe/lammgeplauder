@@ -35,7 +35,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = cookies().get(SESSION_COOKIE_NAME)?.value || null;
+  const session = (await cookies()).get(SESSION_COOKIE_NAME)?.value || null;
   return (
     <html lang="de">
       <body className={inter.className}>

@@ -11,7 +11,7 @@ export async function validateUser(email: string): Promise<boolean> {
 }
 
 export async function createSessionCookie(token: string) {
-  cookies().set(SESSION_COOKIE_NAME, token, {
+  (await cookies()).set(SESSION_COOKIE_NAME, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     maxAge: 60 * 60 * 24, // One day
@@ -22,7 +22,7 @@ export async function createSessionCookie(token: string) {
 }
 
 export async function removeSessionCookie() {
-  cookies().delete(SESSION_COOKIE_NAME);
+  (await cookies()).delete(SESSION_COOKIE_NAME);
 
   redirect(ROOT_ROUTE);
 }
