@@ -3727,10 +3727,10 @@ csv-parse@^5.0.4:
   resolved "https://registry.yarnpkg.com/csv-parse/-/csv-parse-5.6.0.tgz#219beace2a3e9f28929999d2aa417d3fb3071c7f"
   integrity sha512-l3nz3euub2QMg5ouu5U09Ew9Wf6/wQ8I++ch1loQ0ljmzhmfZYrH9fflS22i/PQEvsPvxCwxgz5q7UB8K1JO4Q==
 
-cypress@^14.2.1:
-  version "14.2.1"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-14.2.1.tgz#2628696588d3d3961bf0ea0ad87baeb359790dcd"
-  integrity sha512-5xd0E7fUp0pjjib1D7ljkmCwFDgMkWuW06jWiz8dKrI7MNRrDo0C65i4Sh+oZ9YHjMHZRJBR0XZk1DfekOhOUw==
+cypress@^14.3.1:
+  version "14.3.1"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-14.3.1.tgz#b0570c0e5b198d930a2c0f640d099e777bec2d2f"
+  integrity sha512-/2q06qvHMK3PNiadnRW1Je0lJ43gAFPQJUAK2zIxjr22kugtWxVQznTBLVu1AvRH+RP3oWZhCdWqiEi+0NuqCg==
   dependencies:
     "@cypress/request" "^3.0.8"
     "@cypress/xvfb" "^1.2.4"
