@@ -11,15 +11,15 @@ interface Props {
 const CheckboxField: React.FC<Props & RegisterOptions> = ({
   label,
   name,
-  defaultChecked = true,
+  defaultChecked,
   register,
-  ...regsiterOptions
+  ...registerOptions
 }) => {
   return (
     <div className={"flex flex-col"}>
       <label className="inline-flex items-center">
         <input
-          {...register(name, regsiterOptions)}
+          {...register(name, registerOptions)}
           type="checkbox"
           name={name}
           defaultChecked={defaultChecked}

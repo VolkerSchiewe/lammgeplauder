@@ -1,3 +1,4 @@
+import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import React, { ReactNode } from "react";
 
 interface Props {
@@ -7,23 +8,24 @@ interface Props {
 }
 
 const Modal: React.FC<Props> = ({ open, onClose, children }) => (
-  <div className={ `fixed z-10 inset-0 overflow-y-auto ${ open ? "block" : "hidden" }` }>
-    <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+  <Dialog open={open} onClose={onClose} className="relative z-10">
+    <DialogBackdrop
+          transition
+          className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+        />
 
-      <div
-        className={ `fixed inset-0 transition-opacity` }
-        aria-hidden="true">
-        <div className="absolute inset-0 bg-gray-500 opacity-75" onClick={ onClose }/>
-      </div>
-
-      <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-      <div
-        className={ `inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full` }
-        role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-          { children }
-      </div>
-    </div>
-  </div>
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <DialogPanel
+              transition
+              className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+            >
+              {children}
+            </DialogPanel>
+          </div>
+        </div>
+  </Dialog>
+ 
 )
 
 export default Modal

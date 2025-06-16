@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.4",
     "firebase": "^11.9.1",
     "firebase-admin": "^13.4.0",
     "next": "15.3.3",

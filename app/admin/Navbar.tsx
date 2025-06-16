@@ -59,7 +59,7 @@ const Navbar: React.FC = () => {
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="hidden sm:block">
               <div className="flex items-center space-x-4">
-                <Link href={ "/" } legacyBehavior>
+                <Link href={ "/" }>
                   <svg className="cursor-pointer text-gray-400 w-6 h-6" fill="none" stroke="currentColor"
                        viewBox="0 0 24 24"
                        xmlns="http://www.w3.org/2000/svg">

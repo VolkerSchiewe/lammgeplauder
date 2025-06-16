@@ -134,6 +134,7 @@ const EditEpisode: React.FC<Props> = ({ episode, onClose }) => {
               <CheckboxField
                 name="published"
                 register={register}
+                defaultChecked={!episode}
                 label={"Veröffentlichen"}
               />
               <FileField
