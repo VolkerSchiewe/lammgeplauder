@@ -38,7 +38,7 @@
     "eslint-config-next": "15.3.3",
     "firebase-tools": "^14.9.0",
     "jest": "^29.3.1",
-    "jest-environment-jsdom": "^29.3.1",
+    "jest-environment-jsdom": "^30.0.4",
     "tailwindcss": "^4.1.11",
     "typescript": "^5.6.3",
     "vercel": "^41.7.4"
